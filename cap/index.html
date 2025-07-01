@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <title>Word Cards</title>
+</head>
+
+<body>
+    <div style="height:100px"></div>
+
+
+    <div style="display: flex;justify-content: center; align-items: center;">
+        <a style="margin: 0 auto;" href="../index.html" class="lesson_button">
+            На главную
+        </a>
+    </div>
+
+    <div style="height:100px"></div>
+
+
+    <div class="cards-container">
+        <div style="height:100px"></div>
+    </div>
+
+
+
+    <script>
+        const words = [{
+                "arabic": `(also known as Brewer's Theorem) is a fundamental concept in distributed systems. It states that a distributed data store can simultaneously provide at most two out of three guarantees: Consistency, Availability, Partition Tolerance. This means that in the event of a network partition, you must choose to sacrifice either Consistency or Availability.`,
+                "id": 0,
+                "russian": `The CAP Theorem`,
+            },
+            {
+                "arabic": `In the context of the CAP Theorem, Consistency refers to the guarantee that every read receives the most recent write or an error. What it means: All nodes in the distributed system will have the same, most up-to-date view of the data at any given moment. If you write a piece of data to one node, and then immediately read it from another node, you are guaranteed to get the very latest version. Analogy: Imagine a shared document. With strong consistency, if one person saves changes, everyone else sees those changes immediately. No one will ever see an outdated version. Impact of choice: To ensure consistency during a partition, nodes that cannot communicate with the "source of truth" (or the majority of the system) might stop accepting writes or even reads, effectively becoming unavailable.`,
+                "id": 1,
+                "russian": `Consistency`,
+            },
+            {
+                "arabic": `Availability means that every request received by a non-failing node in the system must result in a response. What it means: The system is always operational and responsive to requests. Every query made to the system will receive a response, whether it's the requested data or an indication that the operation failed. The system does not hang or return an error just because of a temporary internal issue (like a network partition). Analogy: A website is available if it always loads and shows something to the user, even if that "something" might be slightly old data. Impact of choice: To ensure availability during a partition, different parts of the system might continue to operate independently, potentially leading to inconsistencies if writes happen on both sides of the partition.`,
+                "id": 2,
+                "russian": `Availability`,
+            },
+            {
+                "arabic": `Partition Tolerance means that the system continues to operate despite an arbitrary number of messages being dropped (or delayed) by the network between nodes. A "network partition" is a communication breakdown that divides a distributed system into two or more isolated sub-systems, where nodes within a sub-system can communicate with each other, but not with nodes in other sub-systems.`,
+                "id": 3,
+                "russian": `Partition Tolerance`,
+            },
+            {
+                "arabic": `The system is designed to handle network failures. In a real-world distributed system, network partitions are inevitable (e.g., cables cut, routers failing, data centers going offline). A partition-tolerant system can detect these failures and continue functioning, rather than completely shutting down.`,
+                "id": 3,
+                "russian": `What it means:`,
+            },
+            {
+                "arabic": `Imagine a group of people working on a project in different rooms. If the internal communication system goes down (a partition), they can still continue working on their individual tasks within their rooms.`,
+                "id": 3,
+                "russian": `Analogy:`,
+            },
+            {
+                "arabic": `For any truly distributed system (especially those across different machines or data centers), partition tolerance is generally considered a must-have. You cannot realistically avoid network failures. This is why the CAP theorem is often simplified to: "In the presence of a network partition (P), you must choose between Consistency (C) and Availability (A)."`,
+                "id": 3,
+                "russian": `Importance:`,
+            },
+            {
+                "arabic": `Since Partition Tolerance (P) is almost always a necessity for a truly distributed system, the CAP theorem states that you effectively have to choose between Consistency (C) and Availability (A) when a network partition occurs:`,
+                "id": 3,
+                "russian": `The Trade-off: Choose 2 out of 3 (in the face of P)`,
+            },
+            {
+                "arabic": `The system will prioritize consistency. If a network partition occurs, the system will ensure that all data is consistent, even if it means some parts of the system become temporarily unavailable.`,
+                "id": 3,
+                "russian": `CP (Consistency & Partition Tolerance):`,
+            },
+            {
+                "arabic": `A database might stop accepting writes or even reads on the "minority" side of a partition to prevent inconsistent data. When the partition heals, all nodes will have the same, correct data.`,
+                "id": 3,
+                "russian": `Example:`,
+            },
+            {
+                "arabic": `Banking systems (where accurate account balances are critical), systems requiring strong transactional guarantees.`,
+                "id": 3,
+                "russian": `Use Cases:`,
+            },
+            {
+                "arabic": `Traditional relational databases (like PostgreSQL, MySQL) often lean towards CP when deployed in a distributed way, or distributed databases like Google Spanner, Apache ZooKeeper.`,
+                "id": 3,
+                "russian": `Examples of databases:`,
+            },
+            {
+                "arabic": `The system will prioritize availability. If a network partition occurs, all parts of the system will remain responsive and available, even if it means some data might temporarily become inconsistent.`,
+                "id": 3,
+                "russian": `AP (Availability & Partition Tolerance):`,
+            },
+            {
+                "arabic": `Writes might be accepted on both sides of a partition. When the partition heals, the system will then need a mechanism to resolve conflicts and eventually achieve consistency (this is known as "eventual consistency").`,
+                "id": 3,
+                "russian": `Example:`,
+            },
+            {
+                "arabic": `Social media feeds (where seeing slightly stale data is better than no data), e-commerce websites (where being able to browse and add to cart is more important than perfectly accurate stock levels at all times).`,
+                "id": 3,
+                "russian": `Use Cases:`,
+            },
+            {
+                "arabic": `Many NoSQL databases like Apache Cassandra, Amazon DynamoDB, CouchDB.`,
+                "id": 3,
+                "russian": `Examples of databases:`,
+            },
+            {
+                "arabic": `This combination is only possible if you do not have Partition Tolerance. In practice, this means the system is not truly distributed across unreliable networks or is essentially a single node. If a network partition happens, a CA system would likely fail to operate completely.`,
+                "id": 3,
+                "russian": `CA (Consistency & Availability):`,
+            },
+            {
+                "arabic": `A traditional monolithic database running on a single server. If the server goes down, the system is neither consistent nor available. If it's a replicated setup without proper partition handling, a network split could lead to severe issues.`,
+                "id": 3,
+                "russian": `Example:`,
+            },
+        ];
+
+        class Card {
+            constructor(word) {
+                this.word = word;
+                this.displayedText = '';
+                this.currentCharIndex = 0;
+                this.currentWordIndex = 0;
+                this.words = this.word.arabic.split(' ');
+                this.cardElement = this.createCardElement();
+            }
+
+            createCardElement() {
+                const card = document.createElement('div');
+                card.className = 'card';
+
+                const russianWord = document.createElement('div');
+                russianWord.innerText = this.word.russian;
+                card.appendChild(russianWord);
+
+                const buttons = document.createElement('div');
+                buttons.className = 'buttons';
+
+                this.hideTextButton = this.createButton('Скрыть текст', this.hideText.bind(this));
+                this.revealNextCharButton = this.createButton('Открыть одну букву', this.revealNextChar.bind(this));
+                this.revealNextWordButton = this.createButton('Открыть слово', this.revealNextWord.bind(this));
+                this.revealAllTextButton = this.createButton('Открыть всё', this.revealAllText.bind(this));
+
+                buttons.appendChild(this.hideTextButton);
+                buttons.appendChild(this.revealNextCharButton);
+                buttons.appendChild(this.revealNextWordButton);
+                buttons.appendChild(this.revealAllTextButton);
+
+                card.appendChild(buttons);
+
+                this.arabicWordElement = document.createElement('div');
+                this.arabicWordElement.className = 'translation';
+                this.arabicWordElement.innerText = this.displayedText;
+                card.appendChild(this.arabicWordElement);
+
+                this.updateButtonStates();
+                return card;
+            }
+
+            createButton(text, onClick) {
+                const button = document.createElement('button');
+                button.innerText = text;
+                button.onclick = onClick;
+                return button;
+            }
+
+            hideText() {
+                this.displayedText = '';
+                this.currentCharIndex = 0;
+                this.currentWordIndex = 0;
+                this.updateTranslation();
+                this.updateButtonStates();
+            }
+
+            revealNextChar() {
+                if (this.currentCharIndex < this.word.arabic.length) {
+                    this.displayedText = this.word.arabic.substring(0, this.currentCharIndex + 1);
+                    this.currentCharIndex++;
+                    if (this.displayedText.endsWith(' ')) {
+                        this.currentWordIndex++;
+                    }
+                    if (this.currentCharIndex === this.word.arabic.length) {
+                        this.displayedText = this.word.arabic;
+                        this.currentCharIndex = this.word.arabic.length;
+                        this.currentWordIndex = this.words.length;
+                    }
+                    this.updateTranslation();
+                    this.updateButtonStates();
+                }
+            }
+
+            revealNextWord() {
+                if (this.currentWordIndex < this.words.length) {
+                    this.displayedText = this.words.slice(0, this.currentWordIndex + 1).join(' ') + ' ';
+                    this.currentCharIndex = this.displayedText.length;
+                    this.currentWordIndex++;
+                    this.updateTranslation();
+                    this.updateButtonStates();
+                }
+            }
+
+            revealAllText() {
+                this.displayedText = this.word.arabic;
+                this.currentCharIndex = this.word.arabic.length;
+                this.currentWordIndex = this.words.length;
+                this.updateTranslation();
+                this.updateButtonStates();
+            }
+
+            updateTranslation() {
+                this.arabicWordElement.innerText = this.displayedText;
+            }
+
+            updateButtonStates() {
+                this.hideTextButton.disabled = !this.displayedText;
+                this.revealNextCharButton.disabled = this.currentCharIndex >= this.word.arabic.length;
+                this.revealNextWordButton.disabled = this.currentWordIndex >= this.words.length;
+                this.revealAllTextButton.disabled = this.currentCharIndex >= this.word.arabic.length;
+            }
+
+            appendTo(container) {
+                container.appendChild(this.cardElement);
+            }
+        }
+
+        const cardsContainer = document.querySelector('.cards-container');
+        words.forEach(word => {
+            const divider = document.createElement('hr');
+            divider.style.border = 'none';
+            divider.style.height = '1px';
+            divider.style.backgroundColor = '#909090';
+            divider.style.margin = '20px 0';
+
+            cardsContainer.appendChild(divider);
+
+
+            const card = new Card(word);
+            card.appendTo(cardsContainer);
+
+            const sizedBox = document.createElement('div');
+            sizedBox.style.height = '20px';
+            cardsContainer.appendChild(sizedBox);
+        });
+        const sizedBox = document.createElement('div');
+        sizedBox.style.height = '400px';
+        cardsContainer.appendChild(sizedBox);
+    </script>
+</body>
+
+</html>

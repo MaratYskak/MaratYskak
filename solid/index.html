@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <title>Word Cards</title>
+</head>
+
+<body>
+    <div style="height:100px"></div>
+
+
+    <div style="display: flex;justify-content: center; align-items: center;">
+        <a style="margin: 0 auto;" href="../index.html" class="lesson_button">
+            На главную
+        </a>
+    </div>
+
+    <div style="height:100px"></div>
+
+
+    <div class="cards-container">
+        <div style="height:100px"></div>
+    </div>
+
+
+
+    <script>
+        const words = [{
+                "arabic": `The SOLID principles are a set of five design principles in object-oriented programming, introduced by Robert C. Martin (Uncle Bob), that help developers create more understandable, flexible, and maintainable software.`,
+                "id": 0,
+                "russian": `The SOLID principles are`,
+            },
+            {
+                "arabic": `A class should have only one job or responsibility. Why it's important: Reduced Complexity: Classes become simpler and easier to understand. Improved Maintainability: Changes to one responsibility don't affect others. Increased Reusability: Single-responsibility classes are easier to reuse in different contexts. Lower Coupling: Classes are less dependent on each other.`,
+                "id": 1,
+                "russian": `Single Responsibility Principle`,
+            },
+            {
+                "arabic": `Example: Instead of having one User class that handles user data, saving to a database, and sending emails, you'd separate these: User (holds user properties like name, email). UserRepository (handles saving/loading user data to/from a database). EmailService (handles sending emails).`,
+                "id": 2,
+                "russian": `SRP example`,
+            },
+            {
+                "arabic": `Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification. This means you should be able to add new functionality without altering the existing, working code.`,
+                "id": 3,
+                "russian": `Open/Closed Principle`,
+            },
+            {
+                "arabic": `Reduced Risk: Less chance of breaking existing functionality when adding new features. Increased Flexibility: Easier to adapt to new requirements. Improved Maintainability: Less refactoring of stable code.`,
+                "id": 3,
+                "russian": `Why it's important:`,
+            },
+            {
+                "arabic": `If you have a Shape interface with a draw() method, and Circle and Square classes implement it. To add a new Triangle shape, you create a new Triangle class that implements Shape and its draw() method. You don't modify the Shape interface or the Circle/Square classes. The Decorator pattern is a great example of OCP in action, allowing you to add new behaviors to objects without changing their original classes.`,
+                "id": 3,
+                "russian": `OCP example`,
+            },
+            {
+                "arabic": `Subtypes must be substitutable for their base types without altering the correctness of the program. If S is a subtype of T, then objects of type T may be replaced with objects of type S without altering any of the desirable properties of the program. (Essentially, if it looks like a duck, quacks like a duck, but needs batteries, you've violated LSP.)`,
+                "id": 3,
+                "russian": `Liskov Substitution Principle`,
+            },
+            {
+                "arabic": `Ensures Correct Inheritance: Helps to ensure that inheritance hierarchies are designed correctly and don't lead to unexpected behavior. Reliable Polymorphism: Guarantees that polymorphism (using a base type reference to a subtype object) works as expected. Robust Systems: Prevents subtle bugs that arise when derived classes break the contract of their base classes.`,
+                "id": 3,
+                "russian": `Why it's important:`,
+            },
+            {
+                "arabic": `Imagine a Bird class with a fly() method. If you create an Ostrich subclass that inherits Bird but cannot fly (or its fly() method does nothing or throws an error), then Ostrich is not a valid substitute for Bird in all contexts where fly() is expected. A better design might be an IFlyable interface that Ostrich doesn't implement, or to refine Bird to be a FlyingBird.`,
+                "id": 3,
+                "russian": `LSP example`,
+            },
+            {
+                "arabic": `Clients should not be forced to depend on interfaces they do not use. Rather than one large, "fat" interface, many small, role-specific interfaces are better.`,
+                "id": 3,
+                "russian": `Interface Segregation Principle`,
+            },
+            {
+                "arabic": `Reduced Coupling: Classes depend only on the methods they actually need. Improved Maintainability: Changes to one part of a large interface don't affect classes that don't use that part. Clearer Design: Interfaces become more focused and easier to understand.`,
+                "id": 3,
+                "russian": `Why it's important:`,
+            },
+            {
+                "arabic": `Instead of a single Worker interface with methods like work(), eat(), sleep(), and manageTeam(), you'd break it down into smaller, more specific interfaces: IWorkable (with work()). IEatable (with eat()). ISleepable (with sleep()). IManageable (with manageTeam()). Now, a RobotWorker can implement IWorkable without being forced to implement IEatable or ISleepable.`,
+                "id": 3,
+                "russian": `ISP example`,
+            },
+            {
+                "arabic": `High-level modules should not depend on low-level modules. Both should depend on abstractions. Abstractions should not depend on details. Details should depend on abstractions. (Essentially, depend on interfaces/abstractions, not concrete implementations.)`,
+                "id": 3,
+                "russian": `Dependency Inversion Principle`,
+            },
+            {
+                "arabic": `Decoupling: Reduces dependencies between concrete classes, making systems more flexible. Testability: Easier to test modules in isolation by swapping out concrete implementations with mocks or stubs. Flexibility & Reusability: Modules become more reusable and adaptable to different environments or technologies.`,
+                "id": 3,
+                "russian": `Why it's important:`,
+            },
+            {
+                "arabic": `A ReportGenerator (high-level module) should not directly depend on a MySQLDatabase (low-level module/detail). Instead: Define a Database interface (abstraction). ReportGenerator depends on the Database interface. MySQLDatabase implements the Database interface. This way, you can easily swap out MySQLDatabase for PostgreSQLDatabase or InMemoryDatabase without changing ReportGenerator's code.`,
+                "id": 3,
+                "russian": `DIP example`,
+            },
+            {
+                "arabic": `Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects," which can contain data (attributes or properties) and code (methods or functions) that operate on that data. The primary goal of OOP is to model real-world entities and their interactions, making software more intuitive, modular, and easier to manage. It contrasts with other paradigms like procedural programming (which focuses on sequences of instructions) or functional programming (which focuses on pure functions and immutability).`,
+                "id": 3,
+                "russian": `OOP`,
+            },
+            {
+                "arabic": `OOP is typically built around four fundamental concepts:`,
+                "id": 3,
+                "russian": `Core Concepts (The Four Pillars of OOP)`,
+            },
+            {
+                "arabic": `Bundling the data (attributes) and methods (functions) that operate on the data within a single unit, or class. It also involves restricting direct access to some of an object's components, meaning internal state is hidden and protected. Analogy: Think of a car. You can drive it (use its methods), but you don't need to know how the engine works internally to operate it. The engine's complex mechanics are encapsulated. Benefit: Protects data integrity, promotes data hiding, makes objects self-contained, and reduces external dependencies.`,
+                "id": 3,
+                "russian": `Encapsulation`,
+            },
+            {
+                "arabic": `Definition: A mechanism where a new class (subclass/derived class) can inherit properties and behaviors from an existing class (superclass/base class). This establishes an "is-a" relationship (e.g., a "Car is a Vehicle"). Analogy: A child inherits traits from its parents. Similarly, a "SportsCar" class might inherit common properties (like speed, color) and methods (startEngine, accelerate) from a "Car" class. Benefit: Promotes code reusability, reduces redundancy, and allows for the creation of hierarchical relationships between classes.`,
+                "id": 3,
+                "russian": `Inheritance`,
+            },
+            {
+                "arabic": `Definition: The ability of an object to take on many forms. More specifically, it means that objects of different classes can be treated as objects of a common superclass type. This allows a single interface to represent different underlying forms (behaviors). Analogy: A single remote control button can perform different actions depending on the device it's interacting with (e.g., the "power" button on a universal remote turns on a TV, a DVD player, or a stereo). Benefit: Increases flexibility, allows for more generic code, simplifies complex systems by reducing the need for if-else or switch statements, and enables dynamic binding. (Common forms: Method Overriding and Method Overloading).`,
+                "id": 3,
+                "russian": `Polymorphism`,
+            },
+            {
+                "arabic": `Definition: Hiding the complex implementation details and showing only the essential features of an object. It focuses on "what" an object does rather than "how" it does it. This is often achieved through abstract classes and interfaces. Analogy: When you use a smartphone, you interact with its screen, buttons, and apps. You don't need to understand the intricate circuit designs, operating system kernel, or chip manufacturing processes. These complexities are abstracted away. Benefit: Simplifies the system by focusing on relevant details, improves maintainability by allowing changes to implementation without affecting external users of the abstraction, and reduces complexity for developers.`,
+                "id": 3,
+                "russian": `Abstraction`,
+            },
+            {
+                "arabic": `Modularity: Objects are self-contained, making them easier to manage, understand, and debug. Reusability: Code defined in classes can be reused through inheritance, saving development time. Maintainability: Changes in one part of the code are less likely to affect other parts due to encapsulation and clear interfaces. Scalability: Easier to expand existing systems by adding new classes or extending existing ones. Flexibility: Polymorphism allows for flexible and extensible designs. Easier Problem Solving: OOP's ability to model real-world problems often leads to more intuitive and understandable solutions.`,
+                "id": 3,
+                "russian": `Key Benefits of OOP`,
+            },
+        ];
+
+        class Card {
+            constructor(word) {
+                this.word = word;
+                this.displayedText = '';
+                this.currentCharIndex = 0;
+                this.currentWordIndex = 0;
+                this.words = this.word.arabic.split(' ');
+                this.cardElement = this.createCardElement();
+            }
+
+            createCardElement() {
+                const card = document.createElement('div');
+                card.className = 'card';
+
+                const russianWord = document.createElement('div');
+                russianWord.innerText = this.word.russian;
+                card.appendChild(russianWord);
+
+                const buttons = document.createElement('div');
+                buttons.className = 'buttons';
+
+                this.hideTextButton = this.createButton('Скрыть текст', this.hideText.bind(this));
+                this.revealNextCharButton = this.createButton('Открыть одну букву', this.revealNextChar.bind(this));
+                this.revealNextWordButton = this.createButton('Открыть слово', this.revealNextWord.bind(this));
+                this.revealAllTextButton = this.createButton('Открыть всё', this.revealAllText.bind(this));
+
+                buttons.appendChild(this.hideTextButton);
+                buttons.appendChild(this.revealNextCharButton);
+                buttons.appendChild(this.revealNextWordButton);
+                buttons.appendChild(this.revealAllTextButton);
+
+                card.appendChild(buttons);
+
+                this.arabicWordElement = document.createElement('div');
+                this.arabicWordElement.className = 'translation';
+                this.arabicWordElement.innerText = this.displayedText;
+                card.appendChild(this.arabicWordElement);
+
+                this.updateButtonStates();
+                return card;
+            }
+
+            createButton(text, onClick) {
+                const button = document.createElement('button');
+                button.innerText = text;
+                button.onclick = onClick;
+                return button;
+            }
+
+            hideText() {
+                this.displayedText = '';
+                this.currentCharIndex = 0;
+                this.currentWordIndex = 0;
+                this.updateTranslation();
+                this.updateButtonStates();
+            }
+
+            revealNextChar() {
+                if (this.currentCharIndex < this.word.arabic.length) {
+                    this.displayedText = this.word.arabic.substring(0, this.currentCharIndex + 1);
+                    this.currentCharIndex++;
+                    if (this.displayedText.endsWith(' ')) {
+                        this.currentWordIndex++;
+                    }
+                    if (this.currentCharIndex === this.word.arabic.length) {
+                        this.displayedText = this.word.arabic;
+                        this.currentCharIndex = this.word.arabic.length;
+                        this.currentWordIndex = this.words.length;
+                    }
+                    this.updateTranslation();
+                    this.updateButtonStates();
+                }
+            }
+
+            revealNextWord() {
+                if (this.currentWordIndex < this.words.length) {
+                    this.displayedText = this.words.slice(0, this.currentWordIndex + 1).join(' ') + ' ';
+                    this.currentCharIndex = this.displayedText.length;
+                    this.currentWordIndex++;
+                    this.updateTranslation();
+                    this.updateButtonStates();
+                }
+            }
+
+            revealAllText() {
+                this.displayedText = this.word.arabic;
+                this.currentCharIndex = this.word.arabic.length;
+                this.currentWordIndex = this.words.length;
+                this.updateTranslation();
+                this.updateButtonStates();
+            }
+
+            updateTranslation() {
+                this.arabicWordElement.innerText = this.displayedText;
+            }
+
+            updateButtonStates() {
+                this.hideTextButton.disabled = !this.displayedText;
+                this.revealNextCharButton.disabled = this.currentCharIndex >= this.word.arabic.length;
+                this.revealNextWordButton.disabled = this.currentWordIndex >= this.words.length;
+                this.revealAllTextButton.disabled = this.currentCharIndex >= this.word.arabic.length;
+            }
+
+            appendTo(container) {
+                container.appendChild(this.cardElement);
+            }
+        }
+
+        const cardsContainer = document.querySelector('.cards-container');
+        words.forEach(word => {
+            const divider = document.createElement('hr');
+            divider.style.border = 'none';
+            divider.style.height = '1px';
+            divider.style.backgroundColor = '#909090';
+            divider.style.margin = '20px 0';
+
+            cardsContainer.appendChild(divider);
+
+
+            const card = new Card(word);
+            card.appendTo(cardsContainer);
+
+            const sizedBox = document.createElement('div');
+            sizedBox.style.height = '20px';
+            cardsContainer.appendChild(sizedBox);
+        });
+        const sizedBox = document.createElement('div');
+        sizedBox.style.height = '400px';
+        cardsContainer.appendChild(sizedBox);
+    </script>
+</body>
+
+</html>
