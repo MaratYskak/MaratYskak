@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <title>Word Cards</title>
+</head>
+
+<body>
+    <div style="height:100px"></div>
+
+
+    <div style="display: flex;justify-content: center; align-items: center;">
+        <a style="margin: 0 auto;" href="../index.html" class="lesson_button">
+            На главную
+        </a>
+    </div>
+
+    <div style="height:100px"></div>
+
+
+    <div class="cards-container">
+        <div style="height:100px"></div>
+    </div>
+
+
+
+    <script>
+        const words = [{
+                "arabic": `A monolithic application is built as a single, unified unit. All the components – frontend, backend logic, data access layer, etc. – are tightly coupled and run together as one service. If you need to scale any part of the application, you have to scale the entire application.`,
+                "id": 0,
+                "russian": `Monolithic Architecture`,
+            },
+            {
+                "arabic": `Simpler Development (Initial): For small applications, it can be quicker to develop and deploy initially because there's only one codebase and fewer moving parts. `,
+                "id": 1,
+                "russian": `Pros of Monoliths:`,
+            },
+            {
+                "arabic": `Easier Debugging & Testing (Initial): Since everything is in one place, end-to-end testing and tracing issues can be more straightforward. Simpler Deployment: You deploy a single executable or WAR/JAR file. No Distributed System Overhead: No network latency between services, no complex inter-service communication to manage.`,
+                "id": 2,
+                "russian": `Pros of Monoliths:`,
+            },
+            {
+                "arabic": `Scalability Challenges: To scale, you must scale the entire application, even if only a small part is under heavy load, leading to inefficient resource utilization.`,
+                "id": 3,
+                "russian": `Cons of Monoliths:`,
+            },
+            {
+                "arabic": `Technology Lock-in: It's hard to adopt new technologies or frameworks for specific modules without affecting the entire application.`,
+                "id": 3,
+                "russian": `Cons of Monoliths:`,
+            },
+            {
+                "arabic": `Slower Development (As it grows): A large, complex codebase can become difficult to manage, understand, and modify.`,
+                "id": 3,
+                "russian": `Cons of Monoliths:`,
+            },
+            {
+                "arabic": `Lower Reliability: A single bug or failure in one module can potentially bring down the entire application.`,
+                "id": 3,
+                "russian": `Cons of Monoliths:`,
+            },
+            {
+                "arabic": `Longer Deployment Times: As the codebase grows, compilation, testing, and deployment cycles can become very long.`,
+                "id": 3,
+                "russian": `Cons of Monoliths:`,
+            },
+            {
+                "arabic": `Team Coordination: Large teams working on a single codebase can lead to bottlenecks and merge conflicts.`,
+                "id": 3,
+                "russian": `Cons of Monoliths:`,
+            },
+            {
+                "arabic": `A microservices architecture is an approach where a single application is composed of many loosely coupled, independently deployable services. Each service typically represents a specific business capability, runs in its own process, and communicates with others over a lightweight mechanism, often an API.`,
+                "id": 3,
+                "russian": `Microservices Architecture:`,
+            },
+            {
+                "arabic": `Independent Scalability: Each service can be scaled independently based on its specific load, optimizing resource usage.`,
+                "id": 3,
+                "russian": `Pros of Microservices:`,
+            },
+            {
+                "arabic": `Technology Diversity (Polyglot): Different services can be developed using different programming languages, frameworks, and databases, allowing teams to choose the best tool for the job.`,
+                "id": 3,
+                "russian": `Pros of Microservices:`,
+            },
+            {
+                "arabic": `Improved Fault Isolation: A failure in one service is less likely to bring down the entire application.`,
+                "id": 3,
+                "russian": `Pros of Microservices:`,
+            },
+            {
+                "arabic": `Faster Development & Deployment: Small, independent teams can work on different services in parallel and deploy them independently and frequently.`,
+                "id": 3,
+                "russian": `Pros of Microservices:`,
+            },
+            {
+                "arabic": `Easier Maintenance: Smaller codebases for each service are easier to understand, maintain, and refactor.`,
+                "id": 3,
+                "russian": `Pros of Microservices:`,
+            },
+            {
+                "arabic": `Better Organization for Large Teams: Teams can own specific services end-to-end.`,
+                "id": 3,
+                "russian": `Pros of Microservices:`,
+            },
+            {
+                "arabic": `Increased Complexity: A distributed system is inherently more complex to design, develop, deploy, and monitor.`,
+                "id": 3,
+                "russian": `Cons of Microservices:`,
+            },
+            {
+                "arabic": `Operational Overhead: Requires robust infrastructure for service discovery, load balancing, API gateways, centralized logging, monitoring, and tracing.`,
+                "id": 3,
+                "russian": `Cons of Microservices:`,
+            },
+            {
+                "arabic": `Distributed Data Management: Managing transactions and data consistency across multiple independent databases is challenging (e.g., distributed transactions, eventual consistency).`,
+                "id": 3,
+                "russian": `Cons of Microservices:`,
+            },
+            {
+                "arabic": `Inter-service Communication Overhead: Network latency and communication failures between services can impact performance and reliability.`,
+                "id": 3,
+                "russian": `Cons of Microservices:`,
+            },
+            {
+                "arabic": `Debugging Challenges: Tracing a request across multiple services can be complex.`,
+                "id": 3,
+                "russian": `Cons of Microservices:`,
+            },
+            {
+                "arabic": `Higher Initial Cost/Learning Curve: More upfront investment in tooling, infrastructure, and team expertise is often required.`,
+                "id": 3,
+                "russian": `Cons of Microservices:`,
+            },
+            {
+                "arabic": `Description: Break down the application into services organized around business domains and capabilities (e.g., Order Service, Catalog Service, Payment Service, User Service). Each service owns its data and logic related to that capability. `,
+                "id": 3,
+                "russian": `Microservices Design Patterns. I. Decomposition Patterns (How to break down a monolith). Decomposition by Business Capability:`,
+            },
+            {
+                "arabic": `Aligns services with business value, promotes strong cohesion within a service, and loose coupling between services.`,
+                "id": 3,
+                "russian": `Benefit:`,
+            },
+            {
+                "arabic": `Description: Similar to business capability, but uses Domain-Driven Design (DDD) concepts, identifying bounded contexts. Each service corresponds to a subdomain within a bounded context.`,
+                "id": 3,
+                "russian": `Decomposition by Subdomain:`,
+            },
+            {
+                "arabic": `Leads to services that are highly autonomous and self-contained, managing their own data and logic without requiring knowledge of other services' internal workings.`,
+                "id": 3,
+                "russian": `Benefit:`,
+            },
+            {
+                "arabic": `Description: A gradual migration strategy to incrementally transform a monolithic application into microservices. New functionality is built as microservices, and existing monolith features are gradually replaced by these new services, "strangling" the old system until it can be retired.`,
+                "id": 3,
+                "russian": `Strangler Fig Pattern:`,
+            },
+            {
+                "arabic": `Reduces risk during migration, allows for continuous delivery, and provides a path to modernize legacy systems without a "big bang" rewrite.`,
+                "id": 3,
+                "russian": `Benefit:`,
+            },
+            {
+                "arabic": `Description: A single entry point for all client requests. The API Gateway handles request routing, composition, protocol translation, authentication, authorization, and rate limiting, offloading these concerns from individual microservices.`,
+                "id": 3,
+                "russian": `II. Integration Patterns (How services communicate): API Gateway:`,
+            },
+            {
+                "arabic": `Simplifies client code, provides a unified API, and centralizes cross-cutting concerns.`,
+                "id": 3,
+                "russian": `Benefit:`,
+            },
+            {
+                "arabic": `Description: A dedicated infrastructure layer for handling service-to-service communication. It decouples concerns like traffic management, load balancing, security, and observability from the application code by injecting a "sidecar" proxy alongside each service instance.`,
+                "id": 3,
+                "russian": `Service Mesh (e.g., Istio, Linkerd):`,
+            },
+            {
+                "arabic": `Simplifies service code, centralizes operational concerns, provides powerful traffic control, and enhances observability.`,
+                "id": 3,
+                "russian": `Benefit:`,
+            },
+            {
+                "arabic": `Description: Services communicate by sending and receiving messages via a message broker (e.g., Kafka, RabbitMQ). This often involves: Message Queue: Point-to-point communication where a sender sends a message to a queue, and a receiver processes it. Publish/Subscribe (Event-Driven Architecture): Services publish events to a topic, and other services subscribe to those topics to react to events.`,
+                "id": 3,
+                "russian": `Asynchronous Messaging (Queues/Events):`,
+            },
+            {
+                "arabic": `Decouples services, improves responsiveness, enables eventual consistency, and enhances scalability and fault tolerance.`,
+                "id": 3,
+                "russian": `Benefit:`,
+            },
+            {
+                "arabic": `Description: Each microservice owns its private database (or schema). Services communicate via APIs, not by directly accessing each other's databases.`,
+                "id": 3,
+                "russian": `III. Database Patterns (How data is managed): Database per Service:`,
+            },
+            {
+                "arabic": `Ensures strong encapsulation, allows services to choose the best database technology for their needs (polyglot persistence), and enables independent schema evolution and deployment.`,
+                "id": 3,
+                "russian": `Benefit:`,
+            },
+            {
+                "arabic": `Description: A way to manage distributed transactions that span multiple services, where each service has its own local database transaction. A saga is a sequence of local transactions, and if one fails, compensating transactions are executed to undo the previous successful transactions.`,
+                "id": 3,
+                "russian": `Saga Pattern:`,
+            },
+            {
+                "arabic": `Enables eventual consistency in distributed systems where a single ACID transaction is not feasible.`,
+                "id": 3,
+                "russian": `Benefit:`,
+            },
+            {
+                "arabic": `Description: Separates the read (query) and write (command) models of a system. A service might have a write model optimized for updates and a separate read model optimized for queries, potentially using different databases and data representations.`,
+                "id": 3,
+                "russian": `CQRS (Command Query Responsibility Segregation):`,
+            },
+            {
+                "arabic": `Improves scalability by allowing independent scaling of read and write workloads, enhances performance for read-heavy operations, and offers more flexible data models. Often combined with Event Sourcing.`,
+                "id": 3,
+                "russian": `Benefit:`,
+            },
+            {
+                "arabic": `Description: All services push their logs to a central logging system (e.g., ELK Stack: Elasticsearch, Logstash, Kibana; Splunk), where they can be aggregated, searched, and analyzed.`,
+                "id": 3,
+                "russian": `IV. Observability Patterns (How to monitor and troubleshoot): Centralized Logging:`,
+            },
+            {
+                "arabic": `Essential for debugging, monitoring, and understanding system behavior across distributed services.`,
+                "id": 3,
+                "russian": `Benefit:`,
+            },
+            {
+                "arabic": `Description: Assigns a unique trace ID to each request entering the system and propagates this ID across all services involved in processing that request. This allows developers to visualize the entire flow of a request through multiple services and identify performance bottlenecks or failures.`,
+                "id": 3,
+                "russian": `Distributed Tracing:`,
+            },
+            {
+                "arabic": `Crucial for understanding latency and pinpointing issues in a distributed environment (e.g., OpenTelemetry, Jaeger, Zipkin).`,
+                "id": 3,
+                "russian": `Benefit:`,
+            },
+            {
+                "arabic": `Description: Each service exposes an endpoint (e.g., /health) that returns its health status, indicating whether it's operational and ready to serve requests.`,
+                "id": 3,
+                "russian": `Health Check API:`,
+            },
+            {
+                "arabic": `Used by load balancers and container orchestrators (like Kubernetes) to determine if a service instance is healthy and should receive traffic.`,
+                "id": 3,
+                "russian": `Benefit:`,
+            },
+            {
+                "arabic": `Description: Services expose metrics (e.g., request rates, error rates, latency, resource utilization) that are collected by a central monitoring system (e.g., Prometheus, Grafana, Datadog).`,
+                "id": 3,
+                "russian": `Metrics and Monitoring:`,
+            },
+            {
+                "arabic": `Provides insights into the performance and behavior of individual services and the system as a whole.`,
+                "id": 3,
+                "russian": `Benefit:`,
+            },
+            {
+                "arabic": `Description: Configuration data (e.g., database credentials, API keys, service endpoints) is stored external to the service binaries, often in a centralized configuration server (e.g., Spring Cloud Config, Consul, Kubernetes ConfigMaps).`,
+                "id": 3,
+                "russian": `V. Cross-Cutting Concern Patterns: Externalized Configuration:`,
+            },
+            {
+                "arabic": `Allows configuration changes without rebuilding and redeploying services, supports different environments (dev, test, prod).`,
+                "id": 3,
+                "russian": `Benefit:`,
+            },
+            {
+                "arabic": `Allows configuration changes without rebuilding and redeploying services, supports different environments (dev, test, prod).`,
+                "id": 3,
+                "russian": `Benefit:`,
+            },
+            {
+                "arabic": `Description: Prevents a microservice from repeatedly trying to invoke a failing remote service. If calls to a service repeatedly fail, the circuit breaker "trips" (opens), preventing further calls for a period. After a timeout, it allows a limited number of requests (half-open state) to check if the service has recovered.`,
+                "id": 3,
+                "russian": `Circuit Breaker:`,
+            },
+            {
+                "arabic": `Prevents cascading failures, improves fault tolerance, and gives failing services time to recover.`,
+                "id": 3,
+                "russian": `Benefit:`,
+            },
+            {
+                "arabic": `Description: A mechanism for services to find and communicate with each other in a dynamic environment (where service instances are frequently created, scaled, and destroyed). Services register themselves with a service registry, and clients query the registry to find available instances.`,
+                "id": 3,
+                "russian": `Service Discovery:`,
+            },
+            {
+                "arabic": `Enables dynamic scaling and deployment, decouples clients from specific service locations (e.g., Eureka, Consul, Kubernetes DNS).`,
+                "id": 3,
+                "russian": `Benefit:`,
+            },
+        ];
+
+        class Card {
+            constructor(word) {
+                this.word = word;
+                this.displayedText = '';
+                this.currentCharIndex = 0;
+                this.currentWordIndex = 0;
+                this.words = this.word.arabic.split(' ');
+                this.cardElement = this.createCardElement();
+            }
+
+            createCardElement() {
+                const card = document.createElement('div');
+                card.className = 'card';
+
+                const russianWord = document.createElement('div');
+                russianWord.innerText = this.word.russian;
+                card.appendChild(russianWord);
+
+                const buttons = document.createElement('div');
+                buttons.className = 'buttons';
+
+                this.hideTextButton = this.createButton('Скрыть текст', this.hideText.bind(this));
+                this.revealNextCharButton = this.createButton('Открыть одну букву', this.revealNextChar.bind(this));
+                this.revealNextWordButton = this.createButton('Открыть слово', this.revealNextWord.bind(this));
+                this.revealAllTextButton = this.createButton('Открыть всё', this.revealAllText.bind(this));
+
+                buttons.appendChild(this.hideTextButton);
+                buttons.appendChild(this.revealNextCharButton);
+                buttons.appendChild(this.revealNextWordButton);
+                buttons.appendChild(this.revealAllTextButton);
+
+                card.appendChild(buttons);
+
+                this.arabicWordElement = document.createElement('div');
+                this.arabicWordElement.className = 'translation';
+                this.arabicWordElement.innerText = this.displayedText;
+                card.appendChild(this.arabicWordElement);
+
+                this.updateButtonStates();
+                return card;
+            }
+
+            createButton(text, onClick) {
+                const button = document.createElement('button');
+                button.innerText = text;
+                button.onclick = onClick;
+                return button;
+            }
+
+            hideText() {
+                this.displayedText = '';
+                this.currentCharIndex = 0;
+                this.currentWordIndex = 0;
+                this.updateTranslation();
+                this.updateButtonStates();
+            }
+
+            revealNextChar() {
+                if (this.currentCharIndex < this.word.arabic.length) {
+                    this.displayedText = this.word.arabic.substring(0, this.currentCharIndex + 1);
+                    this.currentCharIndex++;
+                    if (this.displayedText.endsWith(' ')) {
+                        this.currentWordIndex++;
+                    }
+                    if (this.currentCharIndex === this.word.arabic.length) {
+                        this.displayedText = this.word.arabic;
+                        this.currentCharIndex = this.word.arabic.length;
+                        this.currentWordIndex = this.words.length;
+                    }
+                    this.updateTranslation();
+                    this.updateButtonStates();
+                }
+            }
+
+            revealNextWord() {
+                if (this.currentWordIndex < this.words.length) {
+                    this.displayedText = this.words.slice(0, this.currentWordIndex + 1).join(' ') + ' ';
+                    this.currentCharIndex = this.displayedText.length;
+                    this.currentWordIndex++;
+                    this.updateTranslation();
+                    this.updateButtonStates();
+                }
+            }
+
+            revealAllText() {
+                this.displayedText = this.word.arabic;
+                this.currentCharIndex = this.word.arabic.length;
+                this.currentWordIndex = this.words.length;
+                this.updateTranslation();
+                this.updateButtonStates();
+            }
+
+            updateTranslation() {
+                this.arabicWordElement.innerText = this.displayedText;
+            }
+
+            updateButtonStates() {
+                this.hideTextButton.disabled = !this.displayedText;
+                this.revealNextCharButton.disabled = this.currentCharIndex >= this.word.arabic.length;
+                this.revealNextWordButton.disabled = this.currentWordIndex >= this.words.length;
+                this.revealAllTextButton.disabled = this.currentCharIndex >= this.word.arabic.length;
+            }
+
+            appendTo(container) {
+                container.appendChild(this.cardElement);
+            }
+        }
+
+        const cardsContainer = document.querySelector('.cards-container');
+        words.forEach(word => {
+            const divider = document.createElement('hr');
+            divider.style.border = 'none';
+            divider.style.height = '1px';
+            divider.style.backgroundColor = '#909090';
+            divider.style.margin = '20px 0';
+
+            cardsContainer.appendChild(divider);
+
+
+            const card = new Card(word);
+            card.appendTo(cardsContainer);
+
+            const sizedBox = document.createElement('div');
+            sizedBox.style.height = '20px';
+            cardsContainer.appendChild(sizedBox);
+        });
+        const sizedBox = document.createElement('div');
+        sizedBox.style.height = '400px';
+        cardsContainer.appendChild(sizedBox);
+    </script>
+</body>
+
+</html>
