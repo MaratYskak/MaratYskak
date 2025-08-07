@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <title>Word Cards</title>
+</head>
+
+<body>
+    <div style="height:100px"></div>
+
+
+    <div style="display: flex;justify-content: center; align-items: center;">
+        <a style="margin: 0 auto;" href="../index.html" class="lesson_button">
+            На главную
+        </a>
+    </div>
+
+    <div style="height:100px"></div>
+
+
+    <div class="cards-container">
+        <div style="height:100px"></div>
+    </div>
+
+
+
+    <script>
+        const words = [{
+                "arabic": `Indexes are special data structures used to speed up data retrieval operations on a database table. Instead of scanning through every row in a table to find specific information, a database index provides a direct pointer to the location of the data you're looking for.`,
+                "id": 0,
+                "russian": `indexes`,
+            },
+            {
+                "arabic": `A database index is typically created on one or more columns of a table. When you create an index, the database stores a copy of the data from the indexed columns along with pointers to the original rows. This copy is sorted, making it very fast to search. The most common data structure used for an index is a B-tree, which is optimized for quick lookups, insertions, and deletions.`,
+                "id": 0,
+                "russian": `How do they work?`,
+            },
+            {
+                "arabic": `A B-tree is a self-balancing tree data structure that maintains sorted data and allows searches, sequential access, insertions, and deletions in logarithmic time. It's particularly well-suited for systems that read and write large blocks of data, like databases and file systems.`,
+                "id": 1,
+                "russian": `what is B-tree`,
+            },
+            {
+                "arabic": `"Logarithmic time" means the time it takes to complete an operation grows very slowly as the size of the data increases. It's written as O(log n), where n is the number of items.`,
+                "id": 2,
+                "russian": `Logarithmic time`,
+            },
+            {
+                "arabic": `Clustered Index: This type of index physically reorders the rows in a table based on the values in the indexed column(s). A table can only have one clustered index, as the physical order of rows can only be sorted one way. The primary key of a table often has a clustered index created on it by default.`,
+                "id": 3,
+                "russian": `Types of Indexes`,
+            },
+            {
+                "arabic": `This is a separate data structure that contains a sorted list of the indexed columns and pointers to the location of the actual data rows. The physical order of the rows in the table remains unchanged. A table can have multiple non-clustered indexes.`,
+                "id": 3,
+                "russian": `Non-Clustered Index`,
+            },
+            {
+                "arabic": `In a database, keys are attributes or sets of attributes used to uniquely identify records (rows) in a table and to establish relationships between different tables. They're fundamental to the relational database model because they ensure data integrity and enable efficient data retrieval.`,
+                "id": 3,
+                "russian": `keys`,
+            },
+            {
+                "arabic": `A column or a set of columns that uniquely identifies each row in a table. A primary key must contain unique values for each row, and it cannot have NULL values. Every table should have a primary key.`,
+                "id": 3,
+                "russian": `Primary Key:`,
+            },
+            {
+                "arabic": `A column or a set of columns in one table that references the primary key of another table. Foreign keys establish a link between tables, enforcing referential integrity. This means you can't have a record in one table that refers to a non-existent record in another.`,
+                "id": 3,
+                "russian": `Foreign Key:`,
+            },
+            {
+                "arabic": `Any column or set of columns that can uniquely identify each row in a table. A primary key is chosen from the set of candidate keys. A table can have multiple candidate keys, but only one is chosen as the primary key.`,
+                "id": 3,
+                "russian": `Candidate Key`,
+            },
+            {
+                "arabic": `A set of one or more columns that can uniquely identify a row in a table. A candidate key is a minimal super key; it means removing any column from it would make it no longer unique.`,
+                "id": 3,
+                "russian": `Super Key`,
+            },
+            {
+                "arabic": `A primary key that consists of two or more columns. It's used when a single column isn't sufficient to uniquely identify a row.`,
+                "id": 3,
+                "russian": `Composite Key`,
+            },
+            {
+                "arabic": `A candidate key that is not chosen as the primary key`,
+                "id": 3,
+                "russian": `Alternate Key`,
+            },
+        ];
+
+        class Card {
+            constructor(word) {
+                this.word = word;
+                this.displayedText = '';
+                this.currentCharIndex = 0;
+                this.currentWordIndex = 0;
+                this.words = this.word.arabic.split(' ');
+                this.cardElement = this.createCardElement();
+            }
+
+            createCardElement() {
+                const card = document.createElement('div');
+                card.className = 'card';
+
+                const russianWord = document.createElement('div');
+                russianWord.innerText = this.word.russian;
+                card.appendChild(russianWord);
+
+                const buttons = document.createElement('div');
+                buttons.className = 'buttons';
+
+                this.hideTextButton = this.createButton('Скрыть текст', this.hideText.bind(this));
+                this.revealNextCharButton = this.createButton('Открыть одну букву', this.revealNextChar.bind(this));
+                this.revealNextWordButton = this.createButton('Открыть слово', this.revealNextWord.bind(this));
+                this.revealAllTextButton = this.createButton('Открыть всё', this.revealAllText.bind(this));
+
+                buttons.appendChild(this.hideTextButton);
+                buttons.appendChild(this.revealNextCharButton);
+                buttons.appendChild(this.revealNextWordButton);
+                buttons.appendChild(this.revealAllTextButton);
+
+                card.appendChild(buttons);
+
+                this.arabicWordElement = document.createElement('div');
+                this.arabicWordElement.className = 'translation';
+                this.arabicWordElement.innerText = this.displayedText;
+                card.appendChild(this.arabicWordElement);
+
+                this.updateButtonStates();
+                return card;
+            }
+
+            createButton(text, onClick) {
+                const button = document.createElement('button');
+                button.innerText = text;
+                button.onclick = onClick;
+                return button;
+            }
+
+            hideText() {
+                this.displayedText = '';
+                this.currentCharIndex = 0;
+                this.currentWordIndex = 0;
+                this.updateTranslation();
+                this.updateButtonStates();
+            }
+
+            revealNextChar() {
+                if (this.currentCharIndex < this.word.arabic.length) {
+                    this.displayedText = this.word.arabic.substring(0, this.currentCharIndex + 1);
+                    this.currentCharIndex++;
+                    if (this.displayedText.endsWith(' ')) {
+                        this.currentWordIndex++;
+                    }
+                    if (this.currentCharIndex === this.word.arabic.length) {
+                        this.displayedText = this.word.arabic;
+                        this.currentCharIndex = this.word.arabic.length;
+                        this.currentWordIndex = this.words.length;
+                    }
+                    this.updateTranslation();
+                    this.updateButtonStates();
+                }
+            }
+
+            revealNextWord() {
+                if (this.currentWordIndex < this.words.length) {
+                    this.displayedText = this.words.slice(0, this.currentWordIndex + 1).join(' ') + ' ';
+                    this.currentCharIndex = this.displayedText.length;
+                    this.currentWordIndex++;
+                    this.updateTranslation();
+                    this.updateButtonStates();
+                }
+            }
+
+            revealAllText() {
+                this.displayedText = this.word.arabic;
+                this.currentCharIndex = this.word.arabic.length;
+                this.currentWordIndex = this.words.length;
+                this.updateTranslation();
+                this.updateButtonStates();
+            }
+
+            updateTranslation() {
+                this.arabicWordElement.innerText = this.displayedText;
+            }
+
+            updateButtonStates() {
+                this.hideTextButton.disabled = !this.displayedText;
+                this.revealNextCharButton.disabled = this.currentCharIndex >= this.word.arabic.length;
+                this.revealNextWordButton.disabled = this.currentWordIndex >= this.words.length;
+                this.revealAllTextButton.disabled = this.currentCharIndex >= this.word.arabic.length;
+            }
+
+            appendTo(container) {
+                container.appendChild(this.cardElement);
+            }
+        }
+
+        const cardsContainer = document.querySelector('.cards-container');
+        words.forEach(word => {
+            const divider = document.createElement('hr');
+            divider.style.border = 'none';
+            divider.style.height = '1px';
+            divider.style.backgroundColor = '#909090';
+            divider.style.margin = '20px 0';
+
+            cardsContainer.appendChild(divider);
+
+
+            const card = new Card(word);
+            card.appendTo(cardsContainer);
+
+            const sizedBox = document.createElement('div');
+            sizedBox.style.height = '20px';
+            cardsContainer.appendChild(sizedBox);
+        });
+        const sizedBox = document.createElement('div');
+        sizedBox.style.height = '400px';
+        cardsContainer.appendChild(sizedBox);
+    </script>
+</body>
+
+</html>
