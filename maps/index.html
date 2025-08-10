@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <title>Word Cards</title>
+</head>
+
+<body>
+    <div style="height:100px"></div>
+
+
+    <div style="display: flex;justify-content: center; align-items: center;">
+        <a style="margin: 0 auto;" href="../index.html" class="lesson_button">
+            На главную
+        </a>
+    </div>
+
+    <div style="height:100px"></div>
+
+
+    <div class="cards-container">
+        <div style="height:100px"></div>
+    </div>
+
+
+
+    <script>
+        const words = [{
+                "arabic": `Maps in Go are a powerful built-in data type for storing key-value pairs. They're a reference type, meaning they're a pointer to an underlying data structure.`,
+                "id": 0,
+                "russian": `Maps in Go are`,
+            },
+            {
+                "arabic": `Maps don't guarantee any particular order of their elements. The order can change between iterations or program runs.`,
+                "id": 0,
+                "russian": `order`,
+            },
+            {
+                "arabic": `If multiple goroutines try to read from and write to the same map simultaneously, it will lead to a data race`,
+                "id": 1,
+                "russian": `data race`,
+            },
+            {
+                "arabic": `To safely use a map with multiple goroutines, you must protect it with a mutex (mutual exclusion lock) from the sync package. The most common approach is to embed a sync.RWMutex in a struct with the map.
+                type SafeMap struct {
+    sync.RWMutex
+    items map[string]int
+}`,
+                "id": 2,
+                "russian": `mutex`,
+            },
+            {
+                "arabic": `For specialized, high-performance use cases where keys are written once and read many times, Go also provides sync.Map. This type is optimized for concurrency and provides a thread-safe implementation with a slightly different API, but it's not a general-purpose replacement for the standard map with a mutex.`,
+                "id": 3,
+                "russian": `sync.Map`,
+            },
+            {
+                "arabic": `RWMutex stands for Reader/ Writer Mutual Exclusion lock. It's a synchronization primitive in Go's sync package that allows for more flexible concurrency control than a standard Mutex. It's designed to improve performance in situations where a shared resource is read much more often than it's written to.`,
+                "id": 3,
+                "russian": `RWMutex`,
+            },
+            {
+                "arabic": `Multiple goroutines can acquire a reader lock on the same resource simultaneously. This is the key benefit: it allows concurrent reads, which can significantly boost performance.`,
+                "id": 3,
+                "russian": `Reader Lock (RLock):`,
+            },
+            {
+                "arabic": `Only one goroutine can acquire a writer lock at a time. When a goroutine holds a writer lock, all other goroutines—both readers and writers—are blocked from accessing the resource.`,
+                "id": 3,
+                "russian": `Writer Lock (Lock):`,
+            },
+            
+        ];
+
+        class Card {
+            constructor(word) {
+                this.word = word;
+                this.displayedText = '';
+                this.currentCharIndex = 0;
+                this.currentWordIndex = 0;
+                this.words = this.word.arabic.split(' ');
+                this.cardElement = this.createCardElement();
+            }
+
+            createCardElement() {
+                const card = document.createElement('div');
+                card.className = 'card';
+
+                const russianWord = document.createElement('div');
+                russianWord.innerText = this.word.russian;
+                card.appendChild(russianWord);
+
+                const buttons = document.createElement('div');
+                buttons.className = 'buttons';
+
+                this.hideTextButton = this.createButton('Скрыть текст', this.hideText.bind(this));
+                this.revealNextCharButton = this.createButton('Открыть одну букву', this.revealNextChar.bind(this));
+                this.revealNextWordButton = this.createButton('Открыть слово', this.revealNextWord.bind(this));
+                this.revealAllTextButton = this.createButton('Открыть всё', this.revealAllText.bind(this));
+
+                buttons.appendChild(this.hideTextButton);
+                buttons.appendChild(this.revealNextCharButton);
+                buttons.appendChild(this.revealNextWordButton);
+                buttons.appendChild(this.revealAllTextButton);
+
+                card.appendChild(buttons);
+
+                this.arabicWordElement = document.createElement('div');
+                this.arabicWordElement.className = 'translation';
+                this.arabicWordElement.innerText = this.displayedText;
+                card.appendChild(this.arabicWordElement);
+
+                this.updateButtonStates();
+                return card;
+            }
+
+            createButton(text, onClick) {
+                const button = document.createElement('button');
+                button.innerText = text;
+                button.onclick = onClick;
+                return button;
+            }
+
+            hideText() {
+                this.displayedText = '';
+                this.currentCharIndex = 0;
+                this.currentWordIndex = 0;
+                this.updateTranslation();
+                this.updateButtonStates();
+            }
+
+            revealNextChar() {
+                if (this.currentCharIndex < this.word.arabic.length) {
+                    this.displayedText = this.word.arabic.substring(0, this.currentCharIndex + 1);
+                    this.currentCharIndex++;
+                    if (this.displayedText.endsWith(' ')) {
+                        this.currentWordIndex++;
+                    }
+                    if (this.currentCharIndex === this.word.arabic.length) {
+                        this.displayedText = this.word.arabic;
+                        this.currentCharIndex = this.word.arabic.length;
+                        this.currentWordIndex = this.words.length;
+                    }
+                    this.updateTranslation();
+                    this.updateButtonStates();
+                }
+            }
+
+            revealNextWord() {
+                if (this.currentWordIndex < this.words.length) {
+                    this.displayedText = this.words.slice(0, this.currentWordIndex + 1).join(' ') + ' ';
+                    this.currentCharIndex = this.displayedText.length;
+                    this.currentWordIndex++;
+                    this.updateTranslation();
+                    this.updateButtonStates();
+                }
+            }
+
+            revealAllText() {
+                this.displayedText = this.word.arabic;
+                this.currentCharIndex = this.word.arabic.length;
+                this.currentWordIndex = this.words.length;
+                this.updateTranslation();
+                this.updateButtonStates();
+            }
+
+            updateTranslation() {
+                this.arabicWordElement.innerText = this.displayedText;
+            }
+
+            updateButtonStates() {
+                this.hideTextButton.disabled = !this.displayedText;
+                this.revealNextCharButton.disabled = this.currentCharIndex >= this.word.arabic.length;
+                this.revealNextWordButton.disabled = this.currentWordIndex >= this.words.length;
+                this.revealAllTextButton.disabled = this.currentCharIndex >= this.word.arabic.length;
+            }
+
+            appendTo(container) {
+                container.appendChild(this.cardElement);
+            }
+        }
+
+        const cardsContainer = document.querySelector('.cards-container');
+        words.forEach(word => {
+            const divider = document.createElement('hr');
+            divider.style.border = 'none';
+            divider.style.height = '1px';
+            divider.style.backgroundColor = '#909090';
+            divider.style.margin = '20px 0';
+
+            cardsContainer.appendChild(divider);
+
+
+            const card = new Card(word);
+            card.appendTo(cardsContainer);
+
+            const sizedBox = document.createElement('div');
+            sizedBox.style.height = '20px';
+            cardsContainer.appendChild(sizedBox);
+        });
+        const sizedBox = document.createElement('div');
+        sizedBox.style.height = '400px';
+        cardsContainer.appendChild(sizedBox);
+    </script>
+</body>
+
+</html>
