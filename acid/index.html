@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <title>Word Cards</title>
+</head>
+
+<body>
+    <div style="height:100px"></div>
+
+
+    <div style="display: flex;justify-content: center; align-items: center;">
+        <a style="margin: 0 auto;" href="../index.html" class="lesson_button">
+            На главную
+        </a>
+    </div>
+
+    <div style="height:100px"></div>
+
+
+    <div class="cards-container">
+        <div style="height:100px"></div>
+    </div>
+
+
+
+    <script>
+        const words = [{
+                "arabic": `ACID is an acronym for a set of properties that guarantee the reliability of database transactions. It stands for Atomicity, Consistency, Isolation, and Durability. These properties ensure that data remains valid and reliable, even in the event of errors, power failures, or other issues.`,
+                "id": 0,
+                "russian": `ACID is`,
+            },
+            {
+                "arabic": `A database transaction is a single, logical unit of work that contains one or more database operations. These operations are treated as a whole; they either all succeed and are committed to the database, or they all fail and are rolled back.`,
+                "id": 0,
+                "russian": `A database transaction`,
+            },
+            {
+                "arabic": `Atomicity means that a transaction is treated as a single, indivisible unit of work. It either completes entirely or doesn't execute at all. If any part of a transaction fails, the entire transaction is rolled back, and the database is returned to its state before the transaction began. Example: In a banking transaction, if you transfer money from account A to account B, atomicity ensures that the money is either successfully debited from A and credited to B, or if one of those operations fails, neither happens. The accounts are never left in an inconsistent state where the money is debited but not credited.`,
+                "id": 1,
+                "russian": `Atomicity`,
+            },
+            {
+                "arabic": `Consistency ensures that a transaction brings the database from one valid state to another. It means that any data written to the database must follow all defined rules and constraints, such as unique keys, foreign key relationships, and check constraints. Example: If a rule states that a bank account balance cannot be negative, a transaction that tries to debit more money than is available will fail, and the database will reject the change, thus maintaining a consistent state.`,
+                "id": 2,
+                "russian": `Consistency`,
+            },
+            {
+                "arabic": `Isolation guarantees that concurrent transactions do not interfere with each other. Each transaction appears to be executed in a serial fashion, even if they are happening at the same time. This prevents one transaction from reading data that another transaction is in the process of modifying. Example: If two people try to withdraw money from the same account at the same time, isolation ensures that the transactions are processed one after the other. The database will not allow both transactions to read the same starting balance and then both successfully withdraw the money, leading to an incorrect final balance.`,
+                "id": 3,
+                "russian": `Isolation`,
+            },
+            {
+                "arabic": `Durability guarantees that once a transaction is committed, its changes are permanent. Even if the system crashes immediately after a transaction is committed (e.g., due to a power outage), the database will recover and the committed changes will be present. The data is written to non-volatile storage, like a hard disk, to ensure its persistence. Example: Once a funds transfer is successfully committed, the new account balances are permanently recorded. If the database server then crashes, the next time it starts up, the new balances will still be there.`,
+                "id": 3,
+                "russian": `Durability`,
+            },
+            
+        ];
+
+        class Card {
+            constructor(word) {
+                this.word = word;
+                this.displayedText = '';
+                this.currentCharIndex = 0;
+                this.currentWordIndex = 0;
+                this.words = this.word.arabic.split(' ');
+                this.cardElement = this.createCardElement();
+            }
+
+            createCardElement() {
+                const card = document.createElement('div');
+                card.className = 'card';
+
+                const russianWord = document.createElement('div');
+                russianWord.innerText = this.word.russian;
+                card.appendChild(russianWord);
+
+                const buttons = document.createElement('div');
+                buttons.className = 'buttons';
+
+                this.hideTextButton = this.createButton('Скрыть текст', this.hideText.bind(this));
+                this.revealNextCharButton = this.createButton('Открыть одну букву', this.revealNextChar.bind(this));
+                this.revealNextWordButton = this.createButton('Открыть слово', this.revealNextWord.bind(this));
+                this.revealAllTextButton = this.createButton('Открыть всё', this.revealAllText.bind(this));
+
+                buttons.appendChild(this.hideTextButton);
+                buttons.appendChild(this.revealNextCharButton);
+                buttons.appendChild(this.revealNextWordButton);
+                buttons.appendChild(this.revealAllTextButton);
+
+                card.appendChild(buttons);
+
+                this.arabicWordElement = document.createElement('div');
+                this.arabicWordElement.className = 'translation';
+                this.arabicWordElement.innerText = this.displayedText;
+                card.appendChild(this.arabicWordElement);
+
+                this.updateButtonStates();
+                return card;
+            }
+
+            createButton(text, onClick) {
+                const button = document.createElement('button');
+                button.innerText = text;
+                button.onclick = onClick;
+                return button;
+            }
+
+            hideText() {
+                this.displayedText = '';
+                this.currentCharIndex = 0;
+                this.currentWordIndex = 0;
+                this.updateTranslation();
+                this.updateButtonStates();
+            }
+
+            revealNextChar() {
+                if (this.currentCharIndex < this.word.arabic.length) {
+                    this.displayedText = this.word.arabic.substring(0, this.currentCharIndex + 1);
+                    this.currentCharIndex++;
+                    if (this.displayedText.endsWith(' ')) {
+                        this.currentWordIndex++;
+                    }
+                    if (this.currentCharIndex === this.word.arabic.length) {
+                        this.displayedText = this.word.arabic;
+                        this.currentCharIndex = this.word.arabic.length;
+                        this.currentWordIndex = this.words.length;
+                    }
+                    this.updateTranslation();
+                    this.updateButtonStates();
+                }
+            }
+
+            revealNextWord() {
+                if (this.currentWordIndex < this.words.length) {
+                    this.displayedText = this.words.slice(0, this.currentWordIndex + 1).join(' ') + ' ';
+                    this.currentCharIndex = this.displayedText.length;
+                    this.currentWordIndex++;
+                    this.updateTranslation();
+                    this.updateButtonStates();
+                }
+            }
+
+            revealAllText() {
+                this.displayedText = this.word.arabic;
+                this.currentCharIndex = this.word.arabic.length;
+                this.currentWordIndex = this.words.length;
+                this.updateTranslation();
+                this.updateButtonStates();
+            }
+
+            updateTranslation() {
+                this.arabicWordElement.innerText = this.displayedText;
+            }
+
+            updateButtonStates() {
+                this.hideTextButton.disabled = !this.displayedText;
+                this.revealNextCharButton.disabled = this.currentCharIndex >= this.word.arabic.length;
+                this.revealNextWordButton.disabled = this.currentWordIndex >= this.words.length;
+                this.revealAllTextButton.disabled = this.currentCharIndex >= this.word.arabic.length;
+            }
+
+            appendTo(container) {
+                container.appendChild(this.cardElement);
+            }
+        }
+
+        const cardsContainer = document.querySelector('.cards-container');
+        words.forEach(word => {
+            const divider = document.createElement('hr');
+            divider.style.border = 'none';
+            divider.style.height = '1px';
+            divider.style.backgroundColor = '#909090';
+            divider.style.margin = '20px 0';
+
+            cardsContainer.appendChild(divider);
+
+
+            const card = new Card(word);
+            card.appendTo(cardsContainer);
+
+            const sizedBox = document.createElement('div');
+            sizedBox.style.height = '20px';
+            cardsContainer.appendChild(sizedBox);
+        });
+        const sizedBox = document.createElement('div');
+        sizedBox.style.height = '400px';
+        cardsContainer.appendChild(sizedBox);
+    </script>
+</body>
+
+</html>
