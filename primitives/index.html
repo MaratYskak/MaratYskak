@@ -28,7 +28,18 @@
 
 
     <script>
-        const words = [{
+        const words = [
+            {
+                "arabic": `An atomic operation is guaranteed to complete entirely as a single, indivisible unit of work. No other thread or process can observe the operation in a partially completed state. This is crucial for maintaining data integrity in multi-threaded environments, as it prevents race conditions without the need for more complex synchronization mechanisms like mutexes or locks.`,
+                "id": 0,
+                "russian": `atomic`,
+            },
+            {
+                "arabic": `A Mutex is an operating system-level mechanism that grants a "lock" to a shared resource. An Atomic operation works at a much lower level, often at the level of a CPU instruction. An atomic operation is a single, indivisible instruction that is executed "instantaneously" from the perspective of other threads. For example, to atomically increment a number, the CPU uses a special instruction like fetch-and-add. This instruction guarantees that reading the current value, incrementing it, and writing the new value will happen in one go, without allowing other threads to intercede between those steps. Mutex is a software mechanism, Atomic is a hardware mechanism.`,
+                "id": 0,
+                "russian": `atomic vs mutex`,
+            },
+            {
                 "arabic": `In Go, a rune is an alias for the int32 type. It represents a Unicode code point. A Unicode code point is a single, abstract character, regardless of how it's encoded or how many bytes it takes up in memory or on disk.`,
                 "id": 0,
                 "russian": `rune`,
