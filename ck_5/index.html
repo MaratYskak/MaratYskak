@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <title>Word Cards</title>
+</head>
+
+<body>
+    <div style="height:100px"></div>
+
+
+    <div style="display: flex;justify-content: center; align-items: center;">
+        <a style="margin: 0 auto;" href="../index.html" class="lesson_button">
+            На главную
+        </a>
+    </div>
+
+    <div style="height:100px"></div>
+
+
+    <div class="cards-container">
+        <div style="height:100px"></div>
+    </div>
+
+
+
+    <script>
+        const words = [{
+                "arabic": `
+A data structure is a way of organizing, managing, and storing data in a computer so that it can be accessed and modified efficiently. They are fundamental to computer science as they form the basis for efficient algorithms.
+
+Here are the basic concepts of data structures:
+A data structure is not a programming language but an organizational format that defines the relationship between the data elements and the operations that can be performed on the data. The main goal is to reduce the time and space complexity of problem-solving.
+
+Abstract Data Type (ADT): An ADT defines the logical form of the data type (what the data structure does) but hides the underlying implementation details (how it is done). For example, a Stack ADT is defined by the Push and Pop operations, regardless of whether it's implemented using an array or a linked list.
+
+Data structures are generally classified into two main types:
+
+Linear Data Structures
+ Non-Linear Data Structures
+ 
+ Linear Data Structures is when Data elements are arranged sequentially, where each element is attached to its previous and next neighbor. For example: Array - A collection of elements of the same type stored in contiguous memory locations. Size is usually fixed. Direct access via index. Linked List - A sequence of nodes where each node contains data and a pointer (link) to the next node in the sequence. Size is dynamic. Stack - Follows the Last-In, First-Out (LIFO) principle. Insertion (Push) and deletion (Pop) only occur at one end, called the Top. Queue - Follows the First-In, First-Out (FIFO) principle. Insertion (Enqueue) occurs at the Rear, and deletion (Dequeue) occurs at the Front. 
+ 
+ Non-Linear Data Structures is when Data elements are not arranged sequentially. An element can be connected to multiple other elements, representing complex relationships. For example: Tree - A hierarchical structure where data is organized into nodes connected by edges. It has a single starting node called the Root. Graph - A collection of vertices (nodes) and edges (connections) that link them. It models complex relationships where any item can be connected to any other item. Hash Table - A structure that maps keys to values for efficient lookup. It uses a hash function to compute an index in an array (or bucket) where the value is stored.
+ 
+ Data structures are defined by the set of operations that can be performed on them. The most common operations are: Traversing: Processing all the data elements in the structure exactly once.
+
+Searching: Finding a specific data element within the structure.
+
+Insertion: Adding a new data element to the structure.
+
+Deletion: Removing an existing data element from the structure.
+
+Sorting: Arranging the data elements in a specific order (e.g., ascending or descending).
+
+Merging: Combining two data structures of the same type into a single one.
+
+***
+
+Choosing the right data structure is crucial for designing efficient algorithms. The efficiency of a program is measured in terms of:
+
+Time Complexity: The amount of time an algorithm takes to complete as the input size grows.
+
+Space Complexity: The amount of memory space an algorithm requires to run.
+
+A well-chosen data structure minimizes the time and space resources needed to perform required operations.`,
+                "id": 0,
+                "russian": `Basic Concepts of Data Structures`,
+            },
+            {
+                "arabic": `Data structures are broadly categorized based on how their elements are arranged and the characteristics of their memory allocation. The two main categories are Linear and Non-Linear data structures. A third classification often includes the fundamental Primitive types.
+                
+                Primitive Data Structures (Basic Types) are the most basic building blocks of data structures, usually supported directly by the computer hardware and programming languages. They store a single value.
+                Integer (int)	Stores whole numbers (no fractional part). Floating-Point (float/double)	Stores numbers with a fractional part (decimals).	Character (char)	Stores a single letter, digit, or symbol. Boolean (bool)	Stores logical values: true or false.
+                
+                Non-Primitive Data Structures are more complex structures that are derived from primitive data types. They are designed to store a collection of related data values. This category is further divided into Linear and Non-Linear types.
+
+                In a linear data structure, data elements are arranged in a sequential or linear order. Each element has a unique predecessor and successor (except for the first and last elements). Array - A collection of elements of the same data type stored in contiguous memory locations. Access is very fast using an index. Linked List - A sequence of nodes where each node contains the data and a pointer (or link) to the next node. Allows for dynamic size and efficient insertion/deletion. Stack - An ordered list where all insertions (Push) and deletions (Pop) occur only at one end, called the Top. Queue - An ordered list where elements are inserted (Enqueue) at the Rear and deleted (Dequeue) from the Front.
+
+                In a non-linear data structure, data elements are not arranged sequentially. An element can be connected to multiple elements, representing hierarchical or network-like relationships. Tree - A hierarchical structure where data is organized into nodes connected by edges. It has a single top node called the Root. Graph - A collection of Vertices (nodes) and Edges (connections) that link them. It models complex, many-to-many relationships. Hash Table - A structure that maps Keys to Values using a Hash Function to compute an index in an array. Designed for extremely fast data retrieval.
+                
+                `,
+                "id": 0,
+                "russian": `Types of Data Structures`,
+            },
+            {
+                "arabic": `The purpose of Data Structures in software development is to provide a way to organize, manage, and store data efficiently so that it can be accessed and manipulated effectively by algorithms. They are the fundamental blueprints for structuring data within a program. Choosing the right data structure for a task is crucial as it directly impacts a software application's performance, scalability, and resource usage.
+                
+                The primary roles of data structures in software development include:
+                Optimize Performance. Data structures are chosen to minimize the time complexity (execution time) and space complexity (memory usage) of a program. Faster Operations: Different structures are designed for speed in specific operations. For example, a Hash Table allows for nearly instantaneous element lookup (O(1)), which is much faster than an Array or Linked List search, which might take a long time (O(n)) as the data size grows. Memory Efficiency: They help manage memory. For instance, a Linked List might use more memory for pointers, but an Array requires a fixed, contiguous block, and knowing which to use can save resources.
+                Enable Scalability. As software systems handle growing amounts of data and more users, the right data structures ensure the application remains fast and responsive. Scalable structures like B-trees (used in databases) or Tries (used for autocomplete) are built to manage vast datasets while maintaining fast search and update speeds.
+                Facilitate Effective Algorithms. Algorithms (the step-by-step procedures for solving a problem) rely heavily on how the data is organized. The selection of a data structure is often determined by the algorithm that will operate on it. For example, a Stack or Queue provides the necessary order (LIFO or FIFO) for tasks like managing function calls or processing jobs in a specific sequence. 
+                Organize and Model Real-World Data. Data structures allow complex relationships and data hierarchies found in the real world to be accurately represented in a program. Graphs are used to model networks like social connections or road maps for pathfinding. Trees are used to organize hierarchical data, such as a file system or an organizational chart.
+                
+                In essence, data structures transform abstract data points into a cohesive, organized format, enabling programmers to write cleaner, more maintainable, and highly efficient code.`,
+                "id": 1,
+                "russian": `Purpose of Data Structures in Software Development`,
+            },
+            {
+                "arabic": `Stack and Queue are both linear data structures that store a sequence of elements, but they differ fundamentally in the order in which elements are added and removed. The primary difference lies in the principle they follow for data access: Stack uses Last-In, First-Out (LIFO), and Queue uses First-In, First-Out (FIFO). 
+                Stack (LIFO): The element inserted last is the element that is removed first. It reverses the order of elements. Both insertion (Push) and deletion (Pop) happen at the same end, called the Top.
+                Queue (FIFO): The element inserted first is the element that is removed first. It preserves the order of elements. Insertion (Enqueue) happens at one end (the Rear), and deletion (Dequeue) happens at the other end (the Front).
+
+                Both stacks and queues are designed for very fast access. The fundamental operations for both structures generally have a time complexity of O(1) (constant time), assuming an efficient implementation (like a linked list or dynamic array).
+
+                Stack: Push, Pop, and Peek are all O(1).
+                Queue: Enqueue, Dequeue, Front, and Rear are all O(1).
+                
+                `,
+                "id": 2,
+                "russian": `Comparison of Stack and Queue`,
+            },
+            {
+                "arabic": `The choice between Linked Lists and Arrays in computer science depends on the specific requirements of a program, as they offer different trade-offs regarding memory allocation, access speed, and efficiency of modification operations.
+
+Arrays store elements in contiguous memory locations and offer fast random access (O(1)) via an index, but are generally fixed in size and have slow insertion/deletion (O(n)) as other elements must be shifted.
+
+Linked lists store elements in non-contiguous memory as nodes connected by pointers, offering dynamic size and fast insertion/deletion at the ends or a known position (O(1)), but have slow random access (O(n)) because you must traverse the list from the beginning.
+
+`,
+                "id": 3,
+                "russian": `Linked Lists vs Arrays`,
+            },
+            {
+                "arabic": `
+The core operations performed on binary trees are Insertion, Deletion, Searching, and Traversal. These operations can vary slightly depending on whether you're using a general Binary Tree (BT) or a Binary Search Tree (BST).
+
+Traversal is the process of visiting every node in the tree exactly once in a specific order. Traversal algorithms are generally categorized into two main types: Depth-First Search (DFS) and Breadth-First Search (BFS).
+
+Depth-First Traversal (DFS). These methods prioritize moving deep into a branch before exploring siblings. They are defined by the order in which the Root is visited relative to the Left and Right subtrees. In-order - Recursively visit the left subtree, then the root, then the right subtree. Pre-order - Visit the root, then recursively visit the left subtree, then the right subtree. Post-order - Recursively visit the left subtree, then the right subtree, then the root.
+
+Breadth-First Traversal (BFS). Visit all nodes at the current level from left to right before moving to the next level. Uses a queue data structure.
+
+Insertion adds a new node to the tree while maintaining the tree's properties. 
+
+General Binary Tree (BT). A new node is typically inserted at the first available spot in level order (to keep the tree "complete" or balanced), usually as the next available null pointer from the left.
+
+Binary Search Tree (BST). nsertion must follow the BST property:
+
+Start at the root.
+
+If the new key is less than the current node's key, move to the left child.
+
+If the new key is greater than the current node's key, move to the right child.
+
+The search continues until a null spot is found, and the new node is inserted as a leaf at that position.
+
+***
+
+Deletion removes a node with a given key while ensuring the tree remains a valid structure (especially critical for a BST).
+
+General Binary Tree (BT). To maintain structure, the node to be deleted is often replaced by the deepest and rightmost node (the last node in level-order traversal) in the tree. The deepest/rightmost node's value is copied to the deleted node's position, and then the deepest/rightmost node itself is removed (as it will be an easily removable leaf node).
+
+Binary Search Tree (BST). Deletion in a BST has three main cases, based on the number of children the node to be deleted (N) has: Node has 0 children (Leaf Node): Simply remove the node. Node has 1 child: Replace the node (N) with its single child, and connect the child to N's parent. Node has 2 children: This is the most complex case. Replace the node (N) with its in-order successor (the smallest node in N's right subtree) or its in-order predecessor (the largest node in N's left subtree). The replacement node is then recursively deleted from its original position (which now falls into one of the simpler cases).
+
+Searching locates a node with a specific key value in the tree.
+
+General Binary Tree (BT). Since there is no ordering property, searching requires visiting nodes using a traversal technique (like pre-order, in-order, post-order, or level-order) until the target node is found. The worst-case time complexity is O(n), where n is the number of nodes.
+
+Binary Search Tree (BST). The ordering property allows for a much more efficient search:
+
+Start at the root.
+
+If the key equals the current node's value, the search is successful.
+
+If the key is less than the current node's value, search the left subtree.
+
+If the key is greater than the current node's value, search the right subtree.
+The search continues until the node is found or a null pointer is reached. The time complexity is O(h), where h is the height of the tree.
+
+Other Common Operations
+
+Beyond the fundamentals, other useful operations include:
+
+Finding the Height/Max Depth: The length of the longest path from the root to a leaf.
+
+Finding the Minimum/Maximum Element: In a BST, this is the leftmost and rightmost nodes, respectively.
+
+Mirroring/Flipping the Tree: Swapping the left and right children of every node recursively.
+
+Finding the Lowest Common Ancestor (LCA): Finding the lowest node in the tree that is an ancestor to two given nodes.`,
+                "id": 3,
+                "russian": `Operations in Binary Trees`,
+            },
+            {
+                "arabic": `In simple terms, Big O notation (O) is a mathematical notation that describes the limiting behavior of a function when the argument tends towards a particular value or infinity. In the context of algorithms, it is used to classify algorithms according to how their running time or space requirements grow as the input size grows. Big O doesn't measure the exact time an algorithm takes in seconds. Instead, it measures the rate of growth of the algorithm's resource requirements (usually time or memory) relative to the input size, n. It answers the question: "How does the algorithm perform as the data set gets really large?". Typically, Big O is used to describe the worst-case scenario for an algorithm's performance. This provides an upper bound on the time complexity, guaranteeing that the algorithm will take no longer than this to complete. When determining the Big O, we focus only on the dominant term (the one that grows fastest) and ignore constant factors and lower-order terms. This is because, as n approaches infinity, the contribution of these smaller terms becomes negligible compared to the dominant term.
+
+Example: If an algorithm takes 3n 
+2
+ +5n+10 operations, the dominant term is n 
+2
+ . We drop the constant factor 3 and the lower-order terms 5n and 10. Therefore, the Big O complexity is O(n 
+2
+ ).
+ 
+ Here are some of the most common complexities:
+ O(1)	Constant Time	The number of operations does not depend on the input size n.
+ O(logn)	Logarithmic Time	The time grows very slowly; the number of operations is reduced by some factor in each step.
+ O(n)	Linear Time	The time grows directly proportional to the input size n.
+ O(nlogn)	Linearithmic Time	A combination of linear and logarithmic growth. Very efficient for sorting.
+ O(n 
+2
+ )	Quadratic Time	The time grows by the square of the input size. Often involves nested loops.
+ O(2 
+n
+ )	Exponential Time	The time doubles with every addition to the input size. Extremely slow for large n.
+ O(n!)	Factorial Time	The time grows by the factorial of the input size. Incredibly inefficient.`,
+                "id": 3,
+                "russian": `Understanding Big O Notation`,
+            },
+            {
+                "arabic": `For hash tables, the efficiency of the main operations—insertion, deletion, and search—is usually considered in three cases: average, worst, and amortized (for resizing). Search: Average Case: O(1) - On average, searching for an element takes constant time because the hash function distributes keys uniformly across the table. Worst Case: O(n) - In the worst case, all keys hash to the same index, leading to a linked list or similar structure at that index, requiring a linear search through all elements. In practice, this is rare with a good hash function and load factor management. Insertion: Average Case: O(1) - Similar to search, inserting an element typically takes constant time on average. Worst Case: O(n) - Again, in the worst case of collisions, inserting may require traversing a linked list at a single index. However, this is mitigated by resizing the table when the load factor exceeds a certain threshold. Deletion: Average Case: O(1) - Deleting an element also takes constant time on average. Worst Case: O(n) - In the worst case, finding the element to delete may require traversing a linked list at a single index. Amortized Analysis (for resizing): When the hash table reaches a certain load factor (e.g., 0.7), it is resized (usually doubled in size). This resizing operation involves rehashing all existing elements, which takes O(n) time. However, since resizing happens infrequently (only when the load factor threshold is crossed), the amortized time complexity for insertion remains O(1). Overall, with a well-designed hash function and proper load factor management, hash tables provide very efficient average-case performance for insertion, deletion, and search operations.`,
+                "id": 3,
+                "russian": `Big O for Operations in Hash Tables`,
+            },
+            {
+                "arabic": `Array (Unsorted) - Search: O(n) - In the worst case, you may have to look through every element to find the target value. Insertion: O(1) - You can add an element at the end of the array in constant time, assuming there is space. Deletion: O(n) - In the worst case, you may have to shift elements to fill the gap left by the deleted element. Array (Sorted) - Search: O(log n) - You can use binary search to find an element in logarithmic time. Insertion: O(n) - You may need to shift elements to maintain the sorted order. Deletion: O(n) - Similar to insertion, you may need to shift elements after deletion. Linked List - Search: O(n) - You may have to traverse the entire list to find an element. Insertion: O(1) - You can insert a new node at the beginning or end in constant time. Deletion: O(1) - If you have a pointer to the node to be deleted, you can remove it in constant time. Stack - Search: O(n) - You may have to look through all elements to find a specific one. Insertion (Push): O(1) - You can add an element to the top of the stack in constant time. Deletion (Pop): O(1) - You can remove the top element in constant time. Queue - Search: O(n) - You may have to look through all elements to find a specific one. Insertion (Enqueue): O(1) - You can add an element to the rear of the queue in constant time. Deletion (Dequeue): O(1) - You can remove the front element in constant time. Binary Search Tree (BST) - Search: O(h) - In the average case, this is O(log n), but in the worst case (unbalanced tree), it can be O(n). Insertion: O(h) - Similar to search, average case O(log n), worst case O(n). Deletion: O(h) - Similar to search, average case O(log n), worst case O(n). Hash Table - Search: O(1) - On average, searching for an element takes constant time. Insertion: O(1) - On average, inserting an element takes constant time. Deletion: O(1) - On average, deleting an element takes constant time. However, in the worst case (due to collisions), these operations can degrade to O(n). Graph (using adjacency list) - Search: O(V + E) - Where V is the number of vertices and E is the number of edges. Insertion: O(1) - Adding a vertex or edge can be done in constant time. Deletion: O(V + E) - Removing a vertex or edge may require traversing the graph.
+                Binary Search Tree (BST) - Search: O(h) - In the average case, this is O(log n), but in the worst case (unbalanced tree), it can be O(n). Insertion: O(h) - Similar to search, average case O(log n), worst case O(n). Deletion: O(h) - Similar to search, average case O(log n), worst case O(n). Hash Table - Search: O(1) - On average, searching for an element takes constant time. Insertion: O(1) - On average, inserting an element takes constant time. Deletion: O(1) - On average, deleting an element takes constant time. However, in the worst case (due to collisions), these operations can degrade to O(n). Graph (using adjacency list) - Search: O(V + E) - Where V is the number of vertices and E is the number of edges. Insertion: O(1) - Adding a vertex or edge can be done in constant time. Deletion: O(V + E) - Removing a vertex or edge may require traversing the graph.
+                Balanced BST (e.g., AVL, Red-Black Tree) - Search: O(log n) - The height of the tree is kept logarithmic through rotations during insertions and deletions. Insertion: O(log n) - Similar to search, the tree remains balanced after each insertion. Deletion: O(log n) - Similar to search, the tree remains balanced after each deletion.
+                Hash Table (Hash Map) - Search: O(1) - On average, searching for an element takes constant time due to direct indexing. Insertion: O(1) - On average, inserting an element takes constant time. Deletion: O(1) - On average, deleting an element takes constant time. However, in the worst case (due to collisions), these operations can degrade to O(n).
+                Trie (Prefix Tree) - Search: O(m) - Where m is the length of the key being searched. Insertion: O(m) - Similar to search, inserting a key takes time proportional to its length. Deletion: O(m) - Similar to search, deleting a key takes time proportional to its length.`,
+                "id": 3,
+                "russian": `Big O for Search Operations in Data Structures`,
+            },
+            {
+                "arabic": `An algorithm is a precise, step-by-step procedure or set of rules designed to solve a specific problem or perform a particular task in a finite number of steps. It's essentially a blueprint for computation, taking an input and transforming it into a desired output.
+
+For example, a cooking recipe is an algorithm for preparing food, and long division is an algorithm for a mathematical computation. In computer science, algorithms are the foundation of all software and data processing.
+
+The formal definition of an algorithm in computer science includes several critical characteristics:
+
+Input: An algorithm should have zero or more well-defined inputs, which are the data it will operate on.
+
+Output: An algorithm must produce at least one well-defined output, which is the result of the computations.
+
+Definiteness (or Clarity): Every step of the algorithm must be clear and unambiguous. The instructions must be precisely specified so that there is only one interpretation for each step.
+
+Finiteness: An algorithm must terminate after a finite number of steps for all possible inputs. It should not run indefinitely.
+
+Effectiveness (or Feasibility): Every step must be sufficiently basic that it can, in principle, be done exactly and in a finite amount of time, typically with just paper and pencil (or a basic machine).
+
+Principles of a Good Algorithm (Algorithm Analysis)
+While any procedure that meets the above characteristics is an algorithm, a "good" algorithm is one that is also effective and efficient. The principles that underpin the quality and effectiveness of an algorithm include:
+
+1. Correctness
+A good algorithm must be correct, meaning it must always produce the right output for every valid input and satisfy the problem's requirements.
+
+2. Efficiency (Time and Space Complexity)
+This is a critical principle and is generally broken down into two components:
+
+Time Efficiency: How fast the algorithm runs, measured by the number of computational steps. An efficient algorithm performs the task as quickly as possible. This is often described using Big O notation (O(n 
+2
+ ), O(nlogn), O(n), etc.).
+
+Space Efficiency: How much memory (computational resources) the algorithm requires during execution. An efficient algorithm uses memory optimally.
+
+3. Simplicity and Clarity
+The algorithm should be as simple, straightforward, and easy to understand as possible. Simplicity aids in implementation, debugging, and maintenance. Well-documented algorithms are easier to use and integrate.
+
+4. Robustness
+A robust algorithm can handle errors gracefully and manage unexpected or invalid inputs without crashing or producing nonsense results.
+
+5. Generality (Flexibility)
+A good algorithm is generally designed to solve a class of problems, not just a single specific instance. For example, a sorting algorithm should be able to sort any list of numbers, not just a list of five predefined numbers.
+
+6. Maintainability
+The algorithm's structure and code should be easy to modify, update, or adapt to new requirements over time.`,
+                "id": 3,
+                "russian": `Algorithm Definitions and Principles`,
+            },
+            {
+                "arabic": `Sorting algorithms are methods for arranging elements of a list in a specific order, such as numerical or lexicographical. The "basic" sorting algorithms are generally characterized by their simplicity in implementation and concept, but often have poorer performance (specifically in terms of time complexity) compared to more advanced algorithms like QuickSort or MergeSort. They are typically used for small datasets or as teaching tools.
+
+The three most common basic sorting algorithms are: Bubble Sort, Selection Sort, and Insertion Sort.
+
+Bubble Sort
+Concept: Repeatedly steps through the list, compares adjacent elements, and swaps them if they're in the wrong order. The pass through the list is repeated until the list is sorted. Larger elements "bubble up" to the end of the list with each pass.
+
+How it Works (In brief):
+
+Start at the beginning of the list.
+
+Compare the first two elements.
+
+If the first is greater than the second, swap them.
+
+Move to the next pair and repeat.
+
+Continue until the end of the list is reached.
+
+Repeat the entire process from step 1 until no swaps are needed in a pass, indicating the list is sorted.
+
+Time Complexity:
+
+Worst-case and Average-case: O(n 
+2
+ )
+
+Best-case (already sorted): O(n)
+
+2. Selection Sort
+Concept: Divides the list into a sorted part (initially empty) and an unsorted part. It repeatedly finds the smallest (or largest) element from the unsorted part and places it at the end of the sorted part.
+
+How it Works (In brief):
+
+Iterate through the list from the first element to the second-to-last.
+
+In each iteration, find the minimum element in the remaining unsorted portion.
+
+Swap the found minimum element with the first element of the unsorted portion (i.e., the current position in the main iteration).
+
+Time Complexity:
+
+Worst-case, Average-case, and Best-case: O(n 
+2
+ )
+
+3. Insertion Sort
+Concept: Builds the final sorted list one item at a time. It iterates through the input elements and consumes one input element per iteration, finding the correct position for that element within the sorted part of the list.
+
+How it Works (In brief):
+
+Assume the first element is a sorted list of size 1.
+
+Start with the second element and compare it with the elements in the sorted list (to its left).
+
+Shift the elements in the sorted list that are greater than the current element one position to the right.
+
+Insert the current element into the gap created.
+
+Repeat steps 2-4 for all remaining unsorted elements.
+
+Time Complexity:
+
+Worst-case and Average-case: O(n 
+2
+ )
+
+Best-case (already sorted): O(n) (It's efficient for nearly sorted data)`,
+                "id": 3,
+                "russian": `Basic Sorting Algorithms`,
+            },
+            {
+                "arabic": `A search algorithm is a step-by-step procedure used to find a specific piece of information, or a "target," within a collection of data. These algorithms are fundamental to computer science and are categorized based on how they examine the data and their efficiency, often measured by time complexity in Big O notation.
+
+Common Array Search Algorithms
+These algorithms are primarily used to search for an element within a linear data structure like an array or list.
+
+1. Linear Search (Sequential Search) 🚶
+How It Works: It checks every element in the list one by one, from the beginning to the end, until the target is found or the list runs out.
+
+Requirements: The data does not need to be sorted.
+
+Time Complexity:
+
+Worst/Average Case: O(n)—The time taken grows linearly with the size (n) of the array.
+
+Best Case: O(1)—The target is the first element.
+
+Best For: Small datasets or unsorted data.
+
+2. Binary Search (Half-Interval Search) 🎯
+How It Works: It repeatedly divides the search interval in half. It compares the target value with the middle element of the array. If they are not equal, the half in which the target cannot lie is eliminated, and the search continues on the remaining half.
+
+Requirements: The data must be sorted.
+
+Time Complexity: O(logn)—Highly efficient, as the number of operations grows logarithmically with the size of the array. For a million items, it takes about 20 steps.
+
+Best For: Large, sorted datasets.
+
+Other Array Search Algorithms
+Jump Search: Works on sorted arrays by checking elements in fixed steps (or "jumps," usually  
+n
+
+​
+ ) then performing a linear search in the identified block. Time complexity is O( 
+n
+
+​
+ ).
+
+Interpolation Search: An improvement over Binary Search for uniformly distributed sorted data. It estimates the position of the target using the values at the bounds, rather than always checking the middle. Time complexity can be as low as O(loglogn).
+
+Exponential Search: Excellent for unbounded or infinite sorted arrays. It first finds a range where the element might be (by doubling the search window), and then performs a Binary Search within that range. Time complexity is O(logn).
+
+Graph and Tree Search Algorithms
+These algorithms are used for traversing and searching through non-linear data structures like trees and graphs.
+
+1. Breadth-First Search (BFS) 🌊
+How It Works: Explores all the neighboring nodes at the present depth (level) before moving on to nodes at the next depth level. It uses a queue data structure.
+
+Time Complexity: O(V+E), where V is the number of vertices (nodes) and E is the number of edges.
+
+Application: Finding the shortest path in an unweighted graph.
+
+2. Depth-First Search (DFS) 🧗
+How It Works: Explores as far down a path (branch) as possible before backtracking to search other paths. It prioritizes depth over breadth. It uses a stack data structure (or recursion).
+
+Time Complexity: O(V+E).
+
+Application: Checking if a graph is connected, topological sorting, or finding paths.
+
+Applications of Search Algorithms
+Search algorithms are essential and form the basis of many computing tasks:
+
+Web Search Engines (e.g., Google): Complex search algorithms scan and rank vast amounts of data to provide relevant results.
+
+Databases: Used to efficiently retrieve records and specific data from large collections.
+
+Artificial Intelligence: Algorithms like Minimax (for game theory) and A* (for pathfinding) are key to AI and robotics.
+
+Constraint Satisfaction: Solving puzzles like Sudoku or crossword puzzles.
+
+Combinatorial Optimization: Finding optimal solutions to problems like the Traveling Salesperson Problem.`,
+                "id": 3,
+                "russian": `Search Algorithms`,
+            },
+            {
+                "arabic": `Big O Notation and algorithm complexity are fundamental concepts in computer science used to describe the performance or efficiency of an algorithm. They provide a mathematical way to quantify how an algorithm's running time or space requirements grow as the input size increases.
+
+Big O Notation (O)
+Big O Notation (O) specifically describes the upper bound of an algorithm's time or space complexity. It is used to classify algorithms according to how their resource consumption (time or memory) changes with respect to the size of the input, n.
+Key Principles
+Worst-Case Analysis: Big O usually describes the worst-case scenario for an algorithm's performance, providing a guarantee that the algorithm will not take any longer than this to complete.
+
+Dropping Constants: Constant factors are ignored because they become insignificant as n grows very large. For example, O(2n) is simplified to O(n).
+
+Ignoring Lower-Order Terms: Only the term that contributes most significantly to the growth rate (the dominant term) is kept. For example, O(n 
+2
+ +n) is simplified to O(n 
+2
+ ).
+ Algorithm Complexity
+Algorithm complexity is a measure of the resources (time and space) an algorithm requires to solve a problem. It is usually expressed using Big O Notation.
+
+Time Complexity
+Time complexity quantifies the amount of time an algorithm takes to run as a function of the length of the input. It doesn't measure the actual execution time (which depends on the hardware and programming language), but rather the number of elementary operations (like comparisons, assignments, arithmetic operations) the algorithm performs.
+
+Example: O(n) Linear Time
+A loop that iterates through every element of an array of size n once. If the array size doubles, the time taken also roughly doubles.
+
+Space Complexity
+Space complexity quantifies the amount of memory or storage space an algorithm needs to run to completion. This includes the space required for the input (which is often ignored when focusing on auxiliary space complexity) and any temporary variables, data structures, or recursive call stack space used during execution.
+
+Example: O(1) Constant Space
+An algorithm that only uses a fixed number of extra variables regardless of the input size, n.
+
+Why It Matters
+Understanding Big O Notation and complexity allows developers to:
+
+Compare Algorithms: Determine which algorithm is more efficient for a given task, especially with large datasets.
+
+Predict Performance: Estimate how the algorithm will scale as the input size grows.
+
+Identify Bottlenecks: Pinpoint parts of a program that are contributing most to poor performance.
+
+In general, algorithms with a complexity of O(logn), O(n), or O(nlogn) are considered efficient and scalable, while those with O(n 
+2
+ ) or worse become quickly impractical for large inputs.`,
+                "id": 3,
+                "russian": `Big O Notation and Algorithm Complexity`,
+            },
+            {
+                "arabic": `A recursive algorithm is an algorithm that calls itself, either directly or indirectly, to solve a problem. It solves a larger problem by reducing it to smaller, simpler instances of the same problem.
+
+Key Components
+A recursive algorithm must have two essential components:
+
+Base Case(s): These are the conditions where the function stops calling itself and returns a result. Without one or more base cases, the recursion would run infinitely (leading to a stack overflow error). This case handles the simplest possible instance of the problem.
+
+Recursive Step (or Inductive Step): This is where the function calls itself with a smaller or simpler input. The work done in this step moves the algorithm closer to the base case. The result of the recursive call is typically combined with the current step's calculation to form the final answer.
+
+How It Works
+Recursion follows a pattern of divide and conquer or decrease and conquer:
+
+Divide/Decrease: The problem is broken down into a subproblem identical in form to the original, but smaller.
+
+Conquer: The subproblem is solved recursively.
+
+Combine: The solution to the subproblem is used to construct the solution to the original problem.
+
+Types of Recursion
+1. Direct Recursion
+The function calls itself directly. This is the most common type (e.g., Factorial, Fibonacci).
+
+2. Indirect Recursion (Mutual Recursion)
+Two or more functions call each other in a cycle. Function A calls Function B, and Function B calls Function A.
+
+3. Tail Recursion
+The recursive call is the very last operation performed in the function. In some programming languages (like Scheme, Haskell), the compiler can optimize tail recursion by replacing the recursive call with an iterative loop, eliminating the need to maintain a separate stack frame for each call.
+
+4. Non-Tail Recursion
+The result of the recursive call is used in a final expression (e.g., in Factorial, where the result of (n−1)! is multiplied by n after the recursive call returns). This requires keeping track of the return values on the call stack.`,
+                "id": 3,
+                "russian": `Recursive Algorithms`,
+            },
+            {
+                "arabic": `"Advanced sorting algorithms" typically refers to sorting techniques that are asymptotically more efficient than "simple" sorts like Bubble Sort, Selection Sort, and Insertion Sort. These advanced algorithms generally achieve a time complexity of O(nlogn) for comparison-based sorts, or even O(n) for specialized non-comparison-based sorts.
+
+The most common and important advanced sorting algorithms include Quick Sort, Merge Sort, and Heap Sort.
+
+1. Comparison-Based Advanced Sorts (O(nlogn))
+These algorithms achieve the optimal time complexity for any comparison-based sorting algorithm in the average and/or worst case.
+
+Quick Sort
+Strategy: Divide and Conquer. It picks an element as a pivot and partitions the other elements into two sub-arrays, according to whether they are less than or greater than the pivot. The sub-arrays are then sorted recursively.
+
+Time Complexity:
+
+Best/Average Case: O(nlogn)
+
+Worst Case: O(n 
+2
+ ) (occurs when the pivot selection consistently results in highly imbalanced partitions, e.g., if the array is already sorted and the last element is always chosen as the pivot).
+
+Space Complexity: O(logn) (for the recursive call stack) if implemented in-place.
+
+Notes: It's generally considered the fastest sorting algorithm in practice due to its low constant factors and in-place partitioning.
+
+Merge Sort
+Strategy: Divide and Conquer. It divides the unsorted list into n sub-lists, each containing one element (which is considered sorted). It repeatedly merges sub-lists to produce new sorted sub-lists until there is only one sorted list remaining.
+
+Time Complexity:
+
+Best/Average/Worst Case: O(nlogn)
+
+Space Complexity: O(n) (because merging requires a temporary array to hold the elements).
+
+Notes: It is a stable sort (maintains the relative order of equal elements) and has a predictable O(nlogn) performance in all cases. It's often preferred for sorting linked lists or for external sorting where data doesn't fit in memory.
+
+Heap Sort
+Strategy: Selection. It uses a binary heap data structure to efficiently find the largest (or smallest) element. It first builds a max-heap (a complete binary tree where every parent is greater than or equal to its children) from the input data. Then, it repeatedly extracts the maximum element from the heap and rebuilds the heap, essentially sorting the array in-place.
+
+Time Complexity:
+
+Best/Average/Worst Case: O(nlogn)
+
+Space Complexity: O(1) (it is an in-place sort).
+
+Notes: It is not a stable sort. While it has a good worst-case time complexity, it is often slower than Quick Sort in practice due to poor cache utilization.
+
+2. Non-Comparison-Based Advanced Sorts (O(n))
+These algorithms can beat the O(nlogn) lower bound of comparison sorts, but they only work for specific types of data (e.g., integers with a limited range).
+
+Counting Sort
+Strategy: It counts the number of occurrences of each distinct key value. It then calculates the position of each key in the output sequence based on the counts.
+
+Time Complexity: O(n+k), where n is the number of elements and k is the range of the non-negative key values.
+
+Space Complexity: O(n+k)
+
+Notes: Extremely fast when k is small relative to n. It is a stable sort.
+
+Radix Sort
+Strategy: It avoids comparisons by creating and distributing elements into buckets according to their individual digits (or characters). It then processes the digits from least significant to most significant (LSD) or vice-versa (MSD).
+
+Time Complexity: O(nk), where n is the number of elements and k is the number of digits/passes required. If the number of digits is constant, this simplifies to O(n).
+
+Space Complexity: O(n+r), where r is the radix (base of the number system).
+
+Notes: Works well for integers and strings. It is typically a stable sort.
+
+Bucket Sort (or Bin Sort)
+Strategy: It divides the elements into a number of buckets. Each bucket is then sorted individually (using another sorting algorithm like Insertion Sort), and the elements are concatenated to get the final sorted list.
+
+Time Complexity: O(n+k), where n is the number of elements and k is the number of buckets. The O(n) complexity is achieved only if the input is uniformly distributed.
+
+Space Complexity: O(n+k)
+
+Notes: Highly dependent on the data distribution.
+
+3. Hybrid Advanced Sorts
+These are modern, highly optimized algorithms used in standard programming libraries that combine the best aspects of different sorts.
+
+Timsort (Merge Sort + Insertion Sort)
+Strategy: Designed to perform well on real-world data, which often contains runs (already sorted subsequences). It combines Merge Sort for its O(nlogn) worst-case performance and Insertion Sort for its speed on small runs.
+
+Use: Default sorting algorithm for Python and Java (as of Java 7).
+
+Time Complexity (Best/Worst/Average): O(nlogn)
+
+Stability: Stable.
+
+Introsort (Quick Sort + Heap Sort + Insertion Sort)
+Strategy: Introsort (Introspective Sort) starts with Quick Sort for its speed. To avoid Quick Sort's O(n 
+2
+ ) worst-case, it switches to Heap Sort if the recursion depth exceeds a certain limit (based on logn). For very small sub-arrays, it switches to Insertion Sort because of its better constant factors for tiny inputs.
+
+Use: Used in the C++ Standard Template Library (std::sort).
+
+Time Complexity (Best/Worst/Average): O(nlogn)
+
+Stability: Not stable.
+
+`,
+                "id": 3,
+                "russian": `Advanced Sorting Algorithms`,
+            },
+            {
+                "arabic": `Graph Theory is the study of graphs, which are mathematical structures used to model pairwise relations between objects. A graph typically consists of:
+
+Vertices (or Nodes) (V): The fundamental units of the graph.
+
+Edges (or Arcs) (E): The connections between the vertices.
+
+Fundamental Concepts
+Path: A sequence of distinct vertices where each adjacent pair is connected by an edge.
+
+Cycle: A path that starts and ends at the same vertex.
+
+Connectivity: Measures how "connected" the graph is. A connected graph has a path between every pair of vertices.
+
+Degree: The number of edges connected to a vertex.
+
+2. Graph Algorithms ⚙️
+Graph Algorithms are a set of instructions used to solve specific problems on graphs, often by systematically traversing the structure or finding optimal solutions.
+
+Common Algorithm Categories
+1. Traversal Algorithms
+These algorithms are used to visit all vertices and edges in a systematic manner.
+
+Breadth-First Search (BFS): Explores all the neighbor nodes at the present depth before moving on to the nodes at the next depth level. Useful for finding the shortest path in an unweighted graph.
+
+Depth-First Search (DFS): Explores as far as possible along each branch before backtracking. Useful for finding cycles, connected components, and topological sorting.
+
+2. Shortest Path Algorithms
+Used to find a path between two vertices such that the sum of the weights of its edges is minimized.
+
+Dijkstra's Algorithm: Finds the shortest paths from a single source vertex to all other vertices in a graph with non-negative edge weights.
+
+Bellman-Ford Algorithm: Finds the shortest paths from a single source vertex to all other vertices, even if edge weights are negative (as long as there are no negative cycles).
+
+Floyd-Warshall Algorithm: Finds the shortest paths between all pairs of vertices.
+
+3. Minimum Spanning Tree (MST) Algorithms
+In a connected, weighted, undirected graph, an MST is a subgraph that is a tree, connects all the vertices, and the sum of the weights of its edges is the minimum possible.
+
+Prim's Algorithm: Builds the MST by iteratively adding the cheapest edge that connects a vertex in the tree to a vertex outside the tree.
+
+Kruskal's Algorithm: Builds the MST by iteratively adding the cheapest edge that does not form a cycle.
+
+4. Other Important Algorithms
+Topological Sort: A linear ordering of vertices in a Directed Acyclic Graph (DAG) such that for every directed edge u→v, vertex u comes before vertex v in the ordering.
+
+Max Flow / Min Cut (e.g., Ford-Fulkerson): Algorithms used in flow networks to find the maximum possible flow from a source to a sink and the minimum capacity set of edges whose removal disconnects the source from the sink.
+
+3. Real-World Applications 🗺️
+Graph theory and algorithms are critical to modern technology, including:
+
+Navigation and GPS: Finding the fastest/shortest route (Dijkstra's algorithm).
+
+Social Networks (e.g., Facebook, LinkedIn): Modeling connections, suggesting friends, and analyzing spread (traversal algorithms, centrality measures).
+
+Computer Networks (Internet): Routing data packets efficiently (various routing protocols use graph concepts).
+
+Logistics and Supply Chain: Optimizing delivery routes (Traveling Salesperson Problem, which is related to graph cycles).
+
+Compilers/Operating Systems: Scheduling tasks and resolving dependencies (Topological Sort).
+
+Biology: Modeling protein interactions and genetic pathways.`,
+                "id": 3,
+                "russian": `Graph Theory and Algorithms`,
+            },
+            {
+                "arabic": `Dynamic Programming (DP) is an algorithmic technique for solving complex problems by breaking them down into simpler subproblems, solving each subproblem just once, and storing their solutions. 🧠 It's particularly well-suited for problems that exhibit two key properties: optimal substructure and overlapping subproblems.
+
+Key Principles
+1. Optimal Substructure
+A problem has optimal substructure if an optimal solution to the overall problem can be constructed from optimal solutions to its subproblems.
+
+Example: The shortest path between two nodes in a graph contains shortest paths between the intermediate nodes.
+
+2. Overlapping Subproblems
+A problem has overlapping subproblems if the same subproblems are encountered and solved repeatedly during the computation. This is where DP saves time by storing and reusing the results.
+
+Example: Calculating the n 
+th
+  Fibonacci number (F 
+n
+​
+ =F 
+n−1
+​
+ +F 
+n−2
+​
+ ) involves repeatedly calculating the same smaller Fibonacci numbers.
+
+Approaches to Dynamic Programming
+DP problems are typically solved using one of two primary approaches:
+
+A. Memoization (Top-Down)
+This is the recursive approach.
+
+Start with the main problem and recursively break it down into subproblems.
+
+Store the solution to each subproblem in a lookup table (like an array or hash map) as it's computed.
+
+Before computing a subproblem, check the table. If the solution is already present, return the stored value; otherwise, compute it and store the result.
+
+B. Tabulation (Bottom-Up)
+This is the iterative approach.
+
+Start by solving the smallest, base-case subproblems first.
+
+Store their solutions, usually in an array or table.
+
+Use the solutions of the smaller subproblems to iteratively compute the solutions for larger subproblems until the solution for the original problem is reached.
+
+Analogy: Building a pyramid from the base up.
+
+Common Examples
+DP is used to solve a wide range of computational problems, including:
+
+Fibonacci Sequence: Efficiently calculating F 
+n
+​
+ .
+
+Shortest Path Problems: Like the Floyd-Warshall algorithm.
+
+Knapsack Problem: Determining the most valuable items to include in a knapsack given a weight limit.
+
+Longest Common Subsequence (LCS): Finding the longest sequence of characters common to two or more sequences.
+
+Matrix Chain Multiplication: Determining the optimal parenthesization for multiplying a sequence of matrices.`,
+                "id": 3,
+                "russian": `Dynamic Programming`,
+            },
+            {
+                "arabic": `Algorithm optimization techniques are strategies used to improve an algorithm's efficiency (speed) and resource usage (memory/space). These techniques can be broadly categorized into optimizing the underlying algorithm design itself or leveraging computational and structural enhancements.
+
+Core Algorithmic Design Techniques
+These strategies focus on redesigning the algorithm to inherently reduce its time complexity (O(n)) and space complexity.
+
+Reduce Complexity (Big O): This is the most crucial step, aiming to find an entirely different approach that significantly lowers the worst-case runtime and memory usage. For example, replacing a nested loop (O(n 
+2
+ )) with a single pass using an appropriate data structure (O(n)).
+
+Dynamic Programming (DP): A method for solving complex problems by breaking them down into simpler subproblems. It's effective for problems with overlapping subproblems and optimal substructure.
+
+Memoization: Storing the results of expensive function calls and returning the cached result when the same inputs occur again, preventing redundant computations (a top-down approach to DP).
+
+Divide and Conquer: Breaking a problem into two or more smaller, independent subproblems, solving each one, and combining the results. Examples include Merge Sort and Quick Sort.
+
+Greedy Algorithms: Making the locally optimal choice at each stage with the hope of reaching a globally optimal solution. This strategy is not suitable for all problems, but for those it fits, it provides an efficient solution (e.g., Dijkstra's algorithm).
+
+Data Structure and Structural Enhancements
+Choosing the right structure for data storage and manipulation can dramatically change an algorithm's performance.
+
+Data Structures Optimization: Selecting an appropriate data structure for the problem. For instance:
+
+Using a Hash Table (or Map) for near constant-time average look-up (O(1)) instead of a list/array search (O(n)).
+
+Using a Heap for fast access to the minimum or maximum element.
+
+Using a Trie for efficient string searching.
+
+Caching: Storing frequently accessed data in a fast-access layer of memory (like a cache) to reduce the time required for repeated retrieval from slower storage.
+
+Parallel Processing and Concurrency: Dividing an algorithm's tasks into smaller, independent units that can run simultaneously on multi-core processors or distributed systems (e.g., using multi-threading or distributed computing frameworks like MapReduce).
+
+Compiler Optimization: Utilizing optimization flags built into modern compilers (like GCC or LLVM) to automatically refine the generated machine code. Techniques include loop unrolling (reducing loop overhead) and function inlining (replacing a function call with its body to eliminate call overhead).
+
+Mathematical and Search-Based Optimization Algorithms
+In fields like Machine Learning and operations research, specific mathematical algorithms are used to find an optimal set of parameters or a best-possible solution.
+
+Gradient Descent and Variants (First-Order): An iterative first-order optimization algorithm for finding the local minimum of a differentiable function.
+
+Stochastic Gradient Descent (SGD): Updates parameters using a single or a small batch of training examples at a time, making it efficient for large datasets.
+
+Adaptive Learning Rate Methods (e.g., Adam, RMSProp, AdaGrad): These algorithms adjust the learning rate for each parameter individually based on the historical gradients, often leading to faster and more stable convergence.
+
+Newton's Method (Second-Order): Uses both first and second derivatives (the Hessian matrix) to find the minimum. It typically converges faster than gradient descent but is much more computationally expensive.
+
+Metaheuristic Algorithms (Global Optimization): These algorithms are often used for problems where finding the absolute best solution is computationally too hard, or when the search space is complex and non-differentiable.
+
+Simulated Annealing: Inspired by metallurgy, it explores the solution space while occasionally accepting worse solutions (uphill moves) to escape local minima.
+
+Genetic Algorithms (GA): Inspired by natural selection, it uses concepts like mutation, crossover, and selection to evolve a population of candidate solutions toward an optimum.
+
+Particle Swarm Optimization (PSO): A computational method that optimizes a problem by iteratively trying to improve a candidate solution with regard to a given measure of quality, inspired by the social behavior of bird flocking or fish schooling.
+
+Mathematical Programming: Methods for optimizing an objective function subject to constraints.
+
+Linear Programming (LP): Used when the objective function and all constraints are linear.
+
+Nonlinear Programming: Used when the objective function or any constraints are non-linear.`,
+                "id": 3,
+                "russian": `Algorithm Optimization Techniques`,
+            },
+            {
+                "arabic": `The selection of an appropriate data structure is crucial for designing an efficient algorithm, as it determines how data is organized, stored, and accessed. The right structure can drastically improve an algorithm's time and space complexity.
+
+Here are the most common and essential data structures used in algorithms, categorized by their organization:
+
+Linear Data Structures
+These structures arrange data elements sequentially, where each element is connected to its previous and next elements.
+
+Arrays
+Concept: A collection of items of the same data type stored at contiguous memory locations. Elements are accessed using an index.
+
+Key Feature: O(1) time complexity for direct access (getting or setting an element at a specific index).
+
+Algorithmic Uses: The foundation for other data structures (like heaps and hash tables), sorting algorithms (e.g., Quick Sort, Merge Sort), and problems involving fixed-size data sets.
+
+Analogy: A row of mailboxes, where each mailbox has a numbered key (index).
+
+Linked Lists
+Concept: A sequence of nodes, where each node contains the data and a pointer (or link) to the next node in the sequence. They are not stored in contiguous memory.
+
+Key Feature: O(1) time complexity for insertion and deletion at a known position (especially the beginning), as it only requires re-routing pointers.
+
+Algorithmic Uses: Implementing Stacks and Queues, managing dynamic lists (like music playlists or web browser history), and resolving collisions in Hash Tables.
+
+Analogy: A train, where each car (node) is connected to the next.
+
+Stacks
+Concept: A linear structure following the Last-In, First-Out (LIFO) principle. Operations are performed only at one end, called the top.
+
+Push: Adds an element to the top.
+
+Pop: Removes the element from the top.
+
+Algorithmic Uses: Function call management (the call stack), expression evaluation (infix to postfix conversion), and implementing undo/redo functionality.
+
+Analogy: A stack of plates—the last one placed on top is the first one taken off.
+
+Queues
+Concept: A linear structure following the First-In, First-Out (FIFO) principle. Elements are added at the rear (enqueue) and removed from the front (dequeue).
+
+Algorithmic Uses: Breadth-First Search (BFS) graph traversal, task scheduling in operating systems, and handling requests in web servers.
+
+Analogy: A line of people waiting for a bus—the first person in line is the first to board.
+
+Non-Linear Data Structures
+These structures arrange data in a non-sequential, hierarchical, or interconnected manner.
+
+Hash Tables (Hash Maps)
+Concept: A structure that stores key-value pairs. It uses a hash function to compute an index (or hash code) into an array of buckets, which provides a fast location for the data.
+
+Key Feature: O(1) average-case time complexity for lookups, insertions, and deletions.
+
+Algorithmic Uses: Implementing dictionaries in programming languages, caching mechanisms, and fast data retrieval by key.
+
+Analogy: A library where a book's title (key) is run through an algorithm (hash function) to give you its exact shelf number (index).
+
+Trees
+Concept: A hierarchical structure consisting of nodes connected by edges. It has a single starting node called the root, and nodes branch out into children.
+
+Key Feature: Ideal for representing hierarchical data and enabling efficient searching when specialized (e.g., in a Binary Search Tree).
+
+Algorithmic Uses:
+
+Binary Search Trees (BSTs): Used for searching and sorting with O(logn) average-case complexity.
+
+Heaps (a special type of Binary Tree): Used for implementing Priority Queues and the Heap Sort algorithm.
+
+Tries: Used for fast retrieval of keys in a large data set (like auto-complete or spell-check).
+
+Analogy: A family tree or a computer's file system.
+Graphs
+Concept: A collection of vertices (nodes) and edges (links) that connect them. Graphs are used to model relationships between objects.
+
+Key Feature: Highly flexible structure for modeling real-world networks.
+
+Algorithmic Uses: Modeling social networks, mapping/GPS systems (finding the shortest path), network routing protocols, and general relationship analysis.
+
+Core Algorithms: Breadth-First Search (BFS), Depth-First Search (DFS), Dijkstra's Algorithm (shortest path), and Prim's/Kruskal's Algorithms (minimum spanning tree).
+
+Analogy: A subway map, where stations are vertices and tracks are edges.
+
+Choosing the Right Data Structure
+The choice of data structure is the first critical step in algorithm design and is based on the required operations and their desired efficiency.`,
+                "id": 3,
+                "russian": `Data Structures for Algorithms`,
+            },
+            {
+                "arabic": `Computational geometry is a branch of computer science devoted to the study of algorithms and data structures that can be stated in terms of geometry. Its primary goal is to develop efficient solutions for problems involving geometric objects like points, lines, polygons, and polyhedra in low-dimensional spaces, typically 2D and 3D.
+
+Key Topics and Problems
+The field is broadly divided into Combinatorial Computational Geometry (or algorithmic geometry), which deals with geometric objects as discrete entities, and Numerical Computational Geometry (or geometric modeling/CAGD), which focuses on representing real-world objects for computer computations.
+Core Techniques
+Computational geometry employs several specialized algorithmic techniques:
+
+Sweep Line Algorithm: A conceptual plane or line sweeps across the geometric objects, processing events (like a line segment starting or ending) as it goes to solve a problem in an efficient, ordered manner.
+
+Divide and Conquer: Breaking a large geometric problem into smaller, independent subproblems, solving them recursively, and then combining the solutions (e.g., used for some Convex Hull algorithms).
+
+Geometric Primitives: Relying on fundamental, robust, and fast operations on basic objects, such as checking the orientation of three points (left turn, right turn, or collinear) often using determinants.
+
+Randomized Algorithms: Using random choices to guide the algorithm, often leading to simpler implementations and good expected running times.
+
+Applications
+Computational geometry is essential in fields where computers must process and interact with spatial data:
+
+Computer Graphics and Vision 🎮: Used for rendering, hidden surface removal, collision detection, object recognition, and mesh generation for 3D models.
+
+Robotics 🤖: Critical for motion and path planning, obstacle avoidance, and robot navigation.
+
+Geographic Information Systems (GIS) 🗺️: Utilized for map analysis, spatial querying, proximity analysis, and digital elevation models (DEMs) of terrain.
+
+Computer-Aided Design and Manufacturing (CAD/CAM) 🏗️: Used for geometric modeling, curve and surface representation (like Bézier curves and splines), and numerically controlled machining.
+
+Optimization 🎯: Solving problems like finding the smallest bounding box or the largest empty circle within a set of points.`,
+                "id": 3,
+                "russian": `Computational Geometry`,
+            },
+            {
+                "arabic": `Pathfinding algorithms are computational methods used to find the shortest or most efficient route between a starting point and a destination in a graph or grid structure. They are fundamental in computer science, robotics, and artificial intelligence, with applications in GPS navigation, video games, and logistics.
+
+The problem is typically modeled using graph theory, where:
+
+Nodes (or vertices) represent locations (e.g., intersections, cells on a map).
+
+Edges represent possible paths or connections between locations.
+
+Weights (or costs) on the edges represent the "cost" of traversing that path (e.g., distance, time, fuel consumption).
+
+Common Pathfinding Algorithms
+The most common algorithms vary based on whether they are searching for any path or the optimal (shortest/least-cost) path, and whether they use a heuristic to guide the search.
+
+1. Dijkstra's Algorithm
+Dijkstra's algorithm finds the shortest path from a single source node to all other nodes in a weighted graph with non-negative edge weights. It explores outward from the starting node, constantly updating the shortest known distance to each neighbor until the entire graph is covered or the destination is reached.
+
+Key Feature: Guarantees the shortest path for all reachable nodes.
+
+Mechanism: Uses a priority queue to always choose the unvisited node with the smallest known distance from the start.
+
+Application: Network routing (finding the fastest path for data packets), finding the shortest-path tree in a graph.
+
+2. A* (A-Star) Algorithm
+A* is an extension of Dijkstra's algorithm that finds the shortest path between a start node and a specific goal node. It is an informed search algorithm because it uses a heuristic function to prioritize which nodes to explore, making it much more efficient in practice than Dijkstra's for goal-directed searches.
+
+Key Feature: Uses a heuristic to guide the search.
+
+Mechanism: It evaluates each node n using the function f(n)=g(n)+h(n):
+
+g(n): The actual cost (distance) from the start node to n.
+
+h(n): The estimated cost (heuristic) from n to the goal node.
+
+f(n): The estimated total cost of the path through n.
+
+Application: Video game AI (NPC navigation), robotics, GPS systems. A* is optimal (guaranteed to find the shortest path) if the heuristic is admissible (it never overestimates the true cost to the goal).
+
+3. Breadth-First Search (BFS)
+BFS is an uninformed search algorithm that explores a graph level by level, starting from the source node. It finds the shortest path in terms of the number of edges (unweighted graph) or a path that is close to the shortest in a weighted graph.
+
+Key Feature: Explores all neighbors at the current depth before moving to the next depth.
+
+Mechanism: Uses a queue (First-In, First-Out) data structure.
+
+Application: Finding the shortest path in an unweighted graph, web crawling, checking connectivity.
+
+4. Depth-First Search (DFS)
+DFS is another uninformed search algorithm that explores as far as possible along each branch before backtracking.
+
+Key Feature: Explores one branch completely before moving to the next.
+
+Mechanism: Uses a stack (Last-In, First-Out) or recursion.
+
+Application: Solving mazes, topological sorting, finding connected components. DFS does not guarantee the shortest path.
+
+A* vs. Dijkstra's Algorithm
+While both A* and Dijkstra's algorithm find the shortest path in a weighted graph, their primary difference is in their search strategy, which impacts performance.
+`,
+                "id": 3,
+                "russian": `Pathfinding Algorithms`,
+            },
+            {
+                "arabic": `Advanced algorithm concepts cover sophisticated techniques used to solve complex computational problems efficiently. These often go beyond the standard topics like sorting and basic graph traversal, focusing instead on optimization, parallelism, and handling massive data sets.
+
+Here are some key areas and concepts:
+
+Optimization and Approximation
+Linear Programming: A technique for optimizing a linear objective function, subject to linear equality and inequality constraints. Used extensively in resource allocation, scheduling, and logistics.
+
+Non-linear Optimization: Deals with problems where the objective function or constraints are non-linear. This includes convex optimization (where local optima are also global optima) and more general non-convex problems.
+
+Approximation Algorithms: Used for NP-hard optimization problems where finding the exact optimal solution is computationally intractable. These algorithms aim to find a solution that is provably close to the optimal solution within a certain approximation ratio.
+
+Randomized Algorithms: Algorithms that use random numbers to make decisions. Examples include Monte Carlo algorithms (which may give an incorrect result with a small probability) and Las Vegas algorithms (which always give the correct result but have a random running time).
+
+Advanced Data Structures and Techniques
+Amortized Analysis: A method for analyzing the running time of a sequence of operations on a data structure, where the average time per operation is considered, rather than the worst-case time for a single operation.
+
+Disjoint Set Union (DSU) / Union-Find: A data structure that keeps track of a set of elements partitioned into a number of disjoint (non-overlapping) subsets. It's highly optimized for the union (merging two sets) and find (determining which set an element belongs to) operations.
+
+Advanced Tree Structures:
+
+B-Trees and B+-Trees: Used primarily in databases and file systems to efficiently handle large amounts of data on disk (where I/O operations are costly).
+
+Tries (Prefix Trees): Efficiently stores and retrieves keys in a dataset where the keys are usually strings.
+
+Splay Trees and Treaps: Self-adjusting binary search trees designed to keep frequently accessed nodes near the root.
+
+Graph and Flow Algorithms
+Maximum Flow / Minimum Cut: Focuses on finding the maximum amount of "flow" (e.g., oil, data) that can be sent from a source node to a sink node in a network, subject to edge capacity constraints. The Max-Flow Min-Cut Theorem is fundamental here.
+
+Matching: Algorithms for finding a set of edges in a graph such that no two edges share a common vertex. Important in network design and resource pairing (e.g., Bipartite Matching).
+
+All-Pairs Shortest Path (APSP): Algorithms like the Floyd-Warshall algorithm and running a graph traversal algorithm (like Dijkstra's) from every node to find the shortest paths between all pairs of vertices.
+
+Computational Complexity Theory
+P vs. NP: The most famous open problem in computer science, questioning whether every problem whose solution can be verified quickly (NP - Nondeterministic Polynomial time) can also be solved quickly (P - Polynomial time).
+
+NP-Completeness: A class of problems that are the "hardest" in NP. If a polynomial-time algorithm is found for just one NP-complete problem, then P=NP.
+
+Hardness Classes: Beyond P and NP, there are classes like PSPACE (problems solvable with polynomial space) and EXPTIME (problems solvable in exponential time).
+
+Parallel and Distributed Algorithms
+MapReduce: A programming model and associated implementation for processing vast amounts of data in parallel across a cluster of computers. It consists of two main functions: Map (filters and sorts data) and Reduce (performs a summary operation).
+
+Concurrency Control: Algorithms used in multi-user systems (like databases) to ensure that multiple operations can be executed concurrently without compromising data integrity. This includes locking protocols and optimistic concurrency control.
+
+Distributed Consensus: Algorithms like Paxos or Raft that ensure all participants in a distributed system agree on a single value, even if some nodes fail.`,
+                "id": 3,
+                "russian": `Advanced Algorithm Concepts`,
+            },
+            {
+                "arabic": `1. Core Complexity Classes
+Computational complexity theory classifies problems based on the resources (usually time or memory) required by an algorithm to solve them. We focus on decision problems (problems with a YES/NO answer).
+
+A. Class P (Polynomial Time)
+The class P contains all decision problems that can be solved by a deterministic Turing machine in polynomial time.
+
+Definition: A problem L is in P if there exists an algorithm A that can solve L in time O(n 
+k
+ ), where n is the size of the input and k is a constant.
+
+Intuitively: These are problems considered tractable or efficiently solvable in practice.
+
+Examples: Finding the shortest path in a graph, sorting a list, and matrix multiplication.
+
+B. Class NP (Nondeterministic Polynomial Time)
+The class NP contains all decision problems for which a potential YES answer (a solution or certificate) can be verified in polynomial time by a deterministic Turing machine.
+
+Definition: A problem L is in NP if, for any YES instance, there exists a certificate c whose length is polynomial in the input size, such that a polynomial-time algorithm can check if c is a valid solution.
+
+Intuitively: These are problems where it might be hard to find a solution, but easy to check one once it's given.
+
+Examples: Satisfiability (SAT), Traveling Salesperson Problem (TSP) (decision version), and Clique.
+
+Note: P⊆NP because if a solution can be found in polynomial time, it can certainly be verified in polynomial time (by just running the finding algorithm).
+
+2. NP-Complete Problems (NPC)
+NP-Complete problems are the "hardest" problems in NP. They are the bottleneck for solving any problem in NP efficiently.
+
+A. Definition
+A decision problem L is NP-Complete (L∈NPC) if it satisfies two conditions:
+
+L is in NP: (The solution can be verified in polynomial time.)
+
+L is NP-Hard: Every other problem L 
+′
+  in NP can be reduced to L in polynomial time (L 
+′
+ ≤ 
+p
+​
+ L).
+
+B. Polynomial-Time Reduction (≤ 
+p
+​
+ )
+A reduction from problem A to problem B means transforming any instance of A into an equivalent instance of B.
+
+If A≤ 
+p
+​
+ B, it means that if we had an efficient (polynomial-time) algorithm for B, we could use it to solve A efficiently.
+
+For an NPC problem L, the second condition means L is a universal problem for NP: if you can solve L in polynomial time, you can solve every problem in NP in polynomial time.
+
+C. The First NPC Problem
+The existence of NP-Complete problems was established by the Cook-Levin Theorem (1971), which proved that the Boolean Satisfiability Problem (SAT) is NP-Complete.
+
+D. Key NPC Examples
+Once SAT was proven NPC, other problems were proven NPC by reducing SAT to them.
+The P vs NP Problem
+The P vs NP problem is the single most important open question in theoretical computer science.
+
+The Question: Does P equal NP? (i.e., Is finding a solution as easy as verifying one?)
+
+A. Possibility 1: P=NP
+If P=NP, then every problem whose solution can be quickly checked can also be quickly found.
+
+This would mean a polynomial-time algorithm exists for SAT, TSP, and all other NP-Complete problems.
+
+Consequences would be revolutionary in cryptography, optimization, and all fields involving complex searches.
+
+B. Possibility 2: P
+
+=NP (The Consensus)
+If P
+
+=NP, then there are problems in NP (specifically NP-Complete problems) for which no polynomial-time algorithm exists.
+
+This would formally confirm the intuitive belief that searching for solutions to the hardest problems is inherently more difficult than checking a proposed solution.
+
+It would justify the security of modern cryptography, which relies on the assumption that certain problems (like factoring large numbers) are hard (i.e., not in P).
+
+C. Status
+The P vs NP problem is unsolved. It is one of the seven Millennium Prize Problems set by the Clay Mathematics Institute, with a $1,000,000 prize for its solution. Most computer scientists believe that P
+
+=NP.
+
+4. Class NP-Hard (NPH)
+The class NP-Hard is related to NPC but is broader.
+
+Definition: A problem L is NP-Hard if every problem in NP can be reduced to L in polynomial time.
+
+Key Distinction: An NP-Hard problem does not necessarily have to be in NP itself.
+
+Decision Problems: If an NP-Hard problem is also in NP, it is NP-Complete.
+
+Optimization/Function Problems: Many NP-Hard problems are not decision problems. For example, Finding the shortest path for TSP is NP-Hard, but since it asks for a value (the path) and not a YES/NO answer, it is not in NP and therefore not NP-Complete.`,
+                "id": 3,
+                "russian": `Complexity Classes and NP-Complete Problems`,
+            },
+            {
+                "arabic": `Advanced data structures are specialized ways of organizing data that go beyond basic structures (like arrays and simple linked lists) to enable algorithms to operate with significantly greater efficiency, especially when dealing with large datasets or complex relationships. They are crucial for optimizing performance in terms of time and space complexity.
+
+Key Advanced Data Structures and Their Applications
+The following table summarizes several key advanced data structures and their primary applications in algorithms and computer science.
+Importance of Advanced Data Structures
+Mastering advanced data structures is essential for designing algorithms that are:
+
+Time-Efficient: Many advanced structures, like Balanced BSTs and Hash Tables, guarantee O(logn) or O(1) performance for core operations like search, insertion, and deletion, which is critical for handling large-scale data (Big Data).
+
+Space-Optimized: Structures like Tries save space by sharing common prefixes, and Bloom Filters provide membership testing with a minimal memory footprint.
+
+Scalable: They form the backbone of high-performance, complex systems like operating systems, databases, and network routers, ensuring they can adapt to increasing data demands without a dramatic drop in performance.
+
+Problem-Specific: They provide specialized tools for specific complex problems. For example, a Segment Tree is the perfect structure for problems that involve answering range queries on a mutable array, which simpler structures can't do efficiently.`,
+                "id": 3,
+                "russian": `Advanced Data Structures and Their Applications in Algorithms`,
+            },
+            {
+                "arabic": `The context package in Go provides a standard way to manage cancellation signals, deadlines, and request-scoped values across API boundaries and between processes. It's crucial for writing robust, efficient, and reliable Go applications, especially in modern distributed systems. 🧑‍💻
+
+Here are the basics:
+
+1. What is context.Context?
+The context.Context is an interface that carries:
+
+Deadlines: A time when the work should be canceled.
+
+Cancellation Signals: A channel that's closed when the work should be stopped (e.g., due to user hitting "stop" or a parent operation failing).
+
+Request-Scoped Values: Key-value pairs that can be shared across a request's call chain.
+You don't typically create a context directly; you derive new contexts from existing ones using functions from the context package.
+context.Background() - Used as the root context for the main function, initialization, and tests. It never cancels, has no deadline, and carries no values.
+context.TODO() - Used when you are unsure what context to use or if a function will be updated to take a context in the future. It's a placeholder, never use it in production code for new work.
+context.WithCancel(parent) - Derives a new context that can be canceled. It returns the new context and a cancel function. Calling the cancel function will cancel the context and all its children.
+context.WithDeadline(parent, deadline) - Derives a new context with a specific deadline. It returns the new context and a cancel function. The context is automatically canceled when the deadline is reached.
+context.WithTimeout(parent, timeout) - Similar to WithDeadline but takes a duration instead of a specific time. The context is canceled after the timeout duration.
+context.WithValue(parent, key, value) - Derives a new context that carries a key-value pair. This is useful for passing request-scoped data down the call chain.
+Cancellation in Practice
+When you use context.WithCancel, WithDeadline, or WithTimeout, you receive a derived context and a cancel function (or a cancel function is called automatically).
+
+The context's Done() method returns a read-only channel (<-chan struct{}).
+
+When the context is canceled (either by calling cancel() or by the deadline expiring), this Done() channel is closed.
+
+Functions listening to this channel can then detect the cancellation and gracefully return or stop their work, preventing resource leaks.`,
+                "id": 3,
+                "russian": `Basics of context in Go applications`,
+            },
+            {
+                "arabic": `The context package in Go provides the standard mechanism for managing cancellation signals, deadlines, and request-scoped values across API boundaries, especially in server applications and distributed systems.
+                You use context by passing the context.Context interface as the very first argument to any function that performs work that can be canceled, has a timeout, or needs access to request-specific data.
+
+1. Propagating Cancellation and Deadlines
+This is the primary use case. By deriving new contexts from a parent, you ensure that a signal to cancel or timeout propagates down the call chain.
+The context package in Go provides the standard mechanism for managing cancellation signals, deadlines, and request-scoped values across API boundaries, especially in server applications and distributed systems. 🚀
+
+Here is a breakdown of its usage and benefits.
+
+Usage of context.Context
+You use context by passing the context.Context interface as the very first argument to any function that performs work that can be canceled, has a timeout, or needs access to request-specific data.
+
+1. Propagating Cancellation and Deadlines
+This is the primary use case. By deriving new contexts from a parent, you ensure that a signal to cancel or timeout propagates down the call chain.
+
+Function	Usage	Description
+context.WithTimeout(parent, duration)	Used in parent/calling functions (e.g., a server handler) to set an absolute time limit for an operation.	The returned context automatically cancels after the specified duration.
+context.WithCancel(parent)	Used to create a context that can be manually canceled by calling the returned cancel() function.	Useful when you want to stop sub-tasks based on an error or event in the parent task.
+
+Экспортировать в Таблицы
+In the Sub-Task (The Listener):
+
+Functions receiving the context must listen on the context's Done() channel to stop processing gracefully.
+Passing Request-Scoped Values
+You can attach immutable, request-scoped data to a context using context.WithValue. This is mainly used for:
+
+Request IDs/Trace IDs: For correlating logs across services (distributed tracing).
+
+Authentication/User Data: Passing the authenticated user ID or token down to lower layers (e.g., a database layer).
+Context values should be used sparingly and only for data that is per-request and required by multiple layers. Never use context to pass optional function arguments.
+Benefits of Using Context
+Implementing context leads to more resilient, efficient, and maintainable Go applications.
+
+1. Resource Efficiency (Cancellation)
+Context prevents resource leaks and unnecessary computation.
+
+HTTP/gRPC Servers: If a client drops the connection, the server's HTTP handler is immediately canceled. All downstream calls (e.g., database lookups, external API calls) listening to that context are signaled to stop, freeing up database connections, CPU cycles, and memory.
+
+Goroutine Cleanup: When a parent operation is canceled, all child goroutines launched within that operation can check the context and exit, preventing runaway goroutines.
+
+2. Operational Reliability (Timeouts and Deadlines)
+It ensures services have predictable latency and avoids cascading failures.
+
+By setting a deadline or timeout, you guarantee that an operation (like a slow API call) will eventually stop.
+
+This prevents a single slow dependency from tying up resources and causing the entire service to become unresponsive.
+
+3. Observability and Debugging
+Using context to propagate Request IDs is fundamental to modern tracing and logging.
+
+By attaching a unique ID at the entry point of a request, and passing it down via context, every log line from every component (web server, database layer, external service client) for that request can be correlated and tracked.
+
+4. Decoupled API Boundaries
+It provides a standard, non-invasive way to inject operational concerns (cancellation, tracing) into the functional core of your application without adding these concerns to every function signature. This keeps business logic cleaner and focused.`,
+                "id": 3,
+                "russian": `Usage and benefits of context in Go`,
+            },
+            {
+                "arabic": `Passing context to functions and handling default contexts are fundamental practices in writing idiomatic Go code. The core rule is: Context should always be the first argument, and it should never be nil.
+
+Passing Context to Functions
+The context.Context interface is passed to functions to propagate cancellation signals, deadlines, and request-scoped values down the call chain.
+
+1. Rule of Thumb: Context First
+Always make the context the first parameter in a function signature, preceding all other arguments.
+Deriving New Contexts
+When a function calls other functions, it generally passes the context it received to those downstream calls. If the function needs to impose a stricter limit or add values, it derives a new context from the one it received.
+Handling Default Contexts (Background and TODO)
+Since context should never be nil, Go provides two non-cancellable default contexts that serve as the root of a context tree.
+
+1. context.Background()
+Purpose: Use this as the root context for your application's main function, initialization, and tests where there is no inbound request or parent context.
+
+Characteristics: It is the ultimate ancestor. It never cancels, has no deadline, and carries no values.
+
+Usage: When you are starting a background task, a long-running service, or a unit test.
+context.TODO()
+Purpose: Use this context as a placeholder when you are unsure which context to use or when a function signature must be updated to accept a context but you haven't done the full implementation yet.
+
+Characteristics: It is functionally identical to Background().
+
+Usage: It serves as a linter signal (a reminder) to developers that the function needs to be revisited to properly handle or propagate a real context. Avoid using it in production code for new work.
+
+The nil Check (Avoidance)
+Never pass a nil context. If a function receives a nil context, it will panic when attempting to call any of the context's methods (like Done() or Err()).
+
+A function that receives a context should always trust that the caller passed a valid, non-nil context (either a parent context, Background(), or TODO()).`,
+                "id": 3,
+                "russian": `Passing context to functions and handling default contexts`,
+            },
+            {
+                "arabic": `The context package revolves around a single interface and several methods used to inspect and derive contexts. Understanding these is key to using context effectively.
+
+The Context Interface
+The context.Context is the core of the package. Any type that implements these four methods is a valid context.
+Deadline() (deadline time.Time, ok bool) Returns the time when the context is automatically canceled. ok is true if a deadline is set. Used by functions to determine if they have enough time to finish, potentially by choosing a faster path.
+Done() <-chan struct{} Returns a read-only channel that is closed when the context is canceled or its deadline expires. The primary mechanism for functions to listen for a cancellation signal and stop their work gracefully.
+Err() error Returns an error explaining why the context was canceled. Returns nil if the context is still active. Returns context.Canceled or context.DeadlineExceeded otherwise.
+Value(key any) any - Retrieves the value associated with a given key from the context. Used to pass request-scoped, immutable data (like a tracing ID) down the call chain.
+Key Methods for Deriving Contexts
+The context package exports helper functions that take a parent context and return a derived context and, often, a cancellation function.
+WithCancel(parent Context) - Derives a new context that can be canceled manually by calling the returned cancel function. The derived context inherits the parent's deadline and values.
+WithDeadline(parent Context, d time.Time) - Derives a new context with a specific deadline. The derived context is automatically canceled when the deadline is reached. It also returns a cancel function to release resources if the operation completes before the deadline.
+WithTimeout(parent Context, timeout time.Duration) - Similar to WithDeadline but takes a duration instead of a specific time. The derived context is canceled after the timeout duration. It also returns a cancel function.
+WithValue(parent Context, key, val any) - Derives a new context that carries a key-value pair. This is useful for passing request-scoped data down the call chain. The derived context inherits the parent's cancellation and deadline.
+Best Practices
+Always pass context as the first argument to functions that perform work that can be canceled or has a deadline.
+Never pass a nil context. Use context.Background() or context.TODO() as the root context.
+Always call the cancel function returned by WithCancel, WithDeadline, or WithTimeout to free resources, even if you don't need to cancel the context early.
+Use context values sparingly and only for request-scoped data that is required by multiple layers. Avoid using context to pass optional parameters.`,
+                "id": 3,
+                "russian": `Methods and interfaces of the context package in Go`,
+            },
+            {
+                "arabic": `Managing request lifecycles and cancellation signals in Go is primarily achieved through the context.Context package. It provides a standardized, tree-like mechanism to ensure long-running operations can be gracefully canceled, preventing resource leaks and improving service reliability.
+
+Here's how to manage the lifecycle and propagate cancellation signals effectively.
+
+1. Starting the Request Lifecycle (The Root)
+The lifecycle begins when a request enters your service (e.g., an HTTP request, a gRPC call, or a message from a queue).
+
+HTTP Servers
+In standard library HTTP handlers, the incoming http.Request object already has a context associated with it, which is automatically canceled if the client disconnects or if the server's configured timeout is reached.
+Background Tasks
+For a process that starts without an inbound request (like a periodic worker or service initialization), use context.Background() as the root context.
+Propagating Cancellation Signals
+As the request proceeds through your application—calling database drivers, other services, or running concurrent tasks—the context is passed along.
+
+Imposing Time Limits (WithTimeout)
+The most common way to enforce a lifecycle is by setting a timeout for specific sub-operations. This prevents a slow dependency from tying up resources indefinitely.
+Manual Cancellation (WithCancel)
+Use context.WithCancel when you need to explicitly stop a chain of operations based on a logical event, such as an error occurring early or a successful result being found.
+Handling the Cancellation Signal
+Any function or goroutine receiving a context must listen on the context's Done() channel to detect cancellation and stop its work gracefully.
+
+Blocking Operations
+For operations that might block (like a time.Sleep or a channel read), use a select statement to check for both the operation's completion and the cancellation signal.
+Non-Blocking/Looping Operations
+For tasks involving continuous looping, check the context's status at the top of the loop.
+Key Benefit: Using ctx.Done() ensures that when the parent request fails or times out, all its dependent goroutines and operations are cleaned up, preventing the accumulation of "zombie" resources.`,
+                "id": 3,
+                "russian": `Managing request lifecycles and cancellation signals in Go`,
+            },
+            {
+                "arabic": `Durability guarantees that once a transaction is committed, its changes are permanent. Even if the system crashes immediately after a transaction is committed (e.g., due to a power outage), the database will recover and the committed changes will be present. The data is written to non-volatile storage, like a hard disk, to ensure its persistence. Example: Once a funds transfer is successfully committed, the new account balances are permanently recorded. If the database server then crashes, the next time it starts up, the new balances will still be there.`,
+                "id": 3,
+                "russian": `Durability`,
+            },
+            {
+                "arabic": `Durability guarantees that once a transaction is committed, its changes are permanent. Even if the system crashes immediately after a transaction is committed (e.g., due to a power outage), the database will recover and the committed changes will be present. The data is written to non-volatile storage, like a hard disk, to ensure its persistence. Example: Once a funds transfer is successfully committed, the new account balances are permanently recorded. If the database server then crashes, the next time it starts up, the new balances will still be there.`,
+                "id": 3,
+                "russian": `Durability`,
+            },
+            {
+                "arabic": `Durability guarantees that once a transaction is committed, its changes are permanent. Even if the system crashes immediately after a transaction is committed (e.g., due to a power outage), the database will recover and the committed changes will be present. The data is written to non-volatile storage, like a hard disk, to ensure its persistence. Example: Once a funds transfer is successfully committed, the new account balances are permanently recorded. If the database server then crashes, the next time it starts up, the new balances will still be there.`,
+                "id": 3,
+                "russian": `Durability`,
+            },
+            {
+                "arabic": `Durability guarantees that once a transaction is committed, its changes are permanent. Even if the system crashes immediately after a transaction is committed (e.g., due to a power outage), the database will recover and the committed changes will be present. The data is written to non-volatile storage, like a hard disk, to ensure its persistence. Example: Once a funds transfer is successfully committed, the new account balances are permanently recorded. If the database server then crashes, the next time it starts up, the new balances will still be there.`,
+                "id": 3,
+                "russian": `Durability`,
+            },
+            {
+                "arabic": `Durability guarantees that once a transaction is committed, its changes are permanent. Even if the system crashes immediately after a transaction is committed (e.g., due to a power outage), the database will recover and the committed changes will be present. The data is written to non-volatile storage, like a hard disk, to ensure its persistence. Example: Once a funds transfer is successfully committed, the new account balances are permanently recorded. If the database server then crashes, the next time it starts up, the new balances will still be there.`,
+                "id": 3,
+                "russian": `Durability`,
+            },
+
+
+            
+        ];
+
+        class Card {
+            constructor(word) {
+                this.word = word;
+                this.displayedText = '';
+                this.currentCharIndex = 0;
+                this.currentWordIndex = 0;
+                this.words = this.word.arabic.split(' ');
+                this.cardElement = this.createCardElement();
+            }
+
+            createCardElement() {
+                const card = document.createElement('div');
+                card.className = 'card';
+
+                const russianWord = document.createElement('div');
+                russianWord.innerText = this.word.russian;
+                card.appendChild(russianWord);
+
+                const buttons = document.createElement('div');
+                buttons.className = 'buttons';
+
+                this.hideTextButton = this.createButton('Скрыть текст', this.hideText.bind(this));
+                this.revealNextCharButton = this.createButton('Открыть одну букву', this.revealNextChar.bind(this));
+                this.revealNextWordButton = this.createButton('Открыть слово', this.revealNextWord.bind(this));
+                this.revealAllTextButton = this.createButton('Открыть всё', this.revealAllText.bind(this));
+
+                buttons.appendChild(this.hideTextButton);
+                buttons.appendChild(this.revealNextCharButton);
+                buttons.appendChild(this.revealNextWordButton);
+                buttons.appendChild(this.revealAllTextButton);
+
+                card.appendChild(buttons);
+
+                this.arabicWordElement = document.createElement('div');
+                this.arabicWordElement.className = 'translation';
+                this.arabicWordElement.innerText = this.displayedText;
+                card.appendChild(this.arabicWordElement);
+
+                this.updateButtonStates();
+                return card;
+            }
+
+            createButton(text, onClick) {
+                const button = document.createElement('button');
+                button.innerText = text;
+                button.onclick = onClick;
+                return button;
+            }
+
+            hideText() {
+                this.displayedText = '';
+                this.currentCharIndex = 0;
+                this.currentWordIndex = 0;
+                this.updateTranslation();
+                this.updateButtonStates();
+            }
+
+            revealNextChar() {
+                if (this.currentCharIndex < this.word.arabic.length) {
+                    this.displayedText = this.word.arabic.substring(0, this.currentCharIndex + 1);
+                    this.currentCharIndex++;
+                    if (this.displayedText.endsWith(' ')) {
+                        this.currentWordIndex++;
+                    }
+                    if (this.currentCharIndex === this.word.arabic.length) {
+                        this.displayedText = this.word.arabic;
+                        this.currentCharIndex = this.word.arabic.length;
+                        this.currentWordIndex = this.words.length;
+                    }
+                    this.updateTranslation();
+                    this.updateButtonStates();
+                }
+            }
+
+            revealNextWord() {
+                if (this.currentWordIndex < this.words.length) {
+                    this.displayedText = this.words.slice(0, this.currentWordIndex + 1).join(' ') + ' ';
+                    this.currentCharIndex = this.displayedText.length;
+                    this.currentWordIndex++;
+                    this.updateTranslation();
+                    this.updateButtonStates();
+                }
+            }
+
+            revealAllText() {
+                this.displayedText = this.word.arabic;
+                this.currentCharIndex = this.word.arabic.length;
+                this.currentWordIndex = this.words.length;
+                this.updateTranslation();
+                this.updateButtonStates();
+            }
+
+            updateTranslation() {
+                this.arabicWordElement.innerText = this.displayedText;
+            }
+
+            updateButtonStates() {
+                this.hideTextButton.disabled = !this.displayedText;
+                this.revealNextCharButton.disabled = this.currentCharIndex >= this.word.arabic.length;
+                this.revealNextWordButton.disabled = this.currentWordIndex >= this.words.length;
+                this.revealAllTextButton.disabled = this.currentCharIndex >= this.word.arabic.length;
+            }
+
+            appendTo(container) {
+                container.appendChild(this.cardElement);
+            }
+        }
+
+        const cardsContainer = document.querySelector('.cards-container');
+        words.forEach(word => {
+            const divider = document.createElement('hr');
+            divider.style.border = 'none';
+            divider.style.height = '1px';
+            divider.style.backgroundColor = '#909090';
+            divider.style.margin = '20px 0';
+
+            cardsContainer.appendChild(divider);
+
+
+            const card = new Card(word);
+            card.appendTo(cardsContainer);
+
+            const sizedBox = document.createElement('div');
+            sizedBox.style.height = '20px';
+            cardsContainer.appendChild(sizedBox);
+        });
+        const sizedBox = document.createElement('div');
+        sizedBox.style.height = '400px';
+        cardsContainer.appendChild(sizedBox);
+    </script>
+</body>
+
+</html>
