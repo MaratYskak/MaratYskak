@@ -51,25 +51,41 @@
             },
             {
                 "arabic": `are fundamental concepts in the architecture of modern operating systems (OS) that help ensure the stability and security of the computer. 
-                The Kernel Space is the privileged region of memory where the Operating System Kernel executes.
+                The Kernel Space is the privileged region of memory where the Operating System Kernel executes. It has full access to all hardware and system resources, including memory management, process scheduling, and hardware communication. Code running in kernel space operates with high privileges, allowing it to perform critical tasks that are essential for the functioning of the OS. However, this also means that any bugs or vulnerabilities in kernel space code can lead to system crashes or security breaches.
+                User Space, on the other hand, is the memory region where user applications and processes run. Code executing in user space has limited access to system resources and cannot directly interact with hardware or perform privileged operations. This separation helps protect the OS from accidental or malicious interference by user applications, as any faults in user space code will not compromise the overall stability of the system. When a user application needs to perform a task that requires higher privileges (like accessing hardware), it must make a system call to transition from user space to kernel space.
+                The core resource for program execution is processor cores.
+
+Cores are scarce, but they have a lot of work, which is why the concept of threads is introduced: threads execute on cores.
+
+The OS scheduler manages threads and optimizes their use to ensure that the cores aren't idle.
+
+OS threads are large and 'scary'—not because they're poorly designed, but because the OS level has its own constraints and operational specifics, meaning we have few threads available to us.
+
+Since there are few threads, but a lot of work inside our program, the concept of goroutines is introduced: goroutines execute on threads.
+
+The Go scheduler manages goroutines and optimizes their use to maximize the effective utilization of threads—creating as few of them as possible and preventing them from becoming idle.
                 `,
                 "id": 1,
                 "russian": `Kernel Space and User Space`,
             },
             {
-                "arabic": `Consistency ensures that a transaction brings the database from one valid state to another. It means that any data written to the database must follow all defined rules and constraints, such as unique keys, foreign key relationships, and check constraints. Example: If a rule states that a bank account balance cannot be negative, a transaction that tries to debit more money than is available will fail, and the database will reject the change, thus maintaining a consistent state.`,
+                "arabic": `There is an entity called Processor. A Processor is an abstraction that represents a logical CPU core. It is not a physical core but rather a context that allows the Go scheduler to manage the execution of goroutines on OS threads. Each Processor is attached to an OS thread, and we can define the number of OS threads using the GOMAXPROCS function. Also each Processor has its own local queue of goroutines that are ready to execute. Goroutines have three key states: Runnable, Executing and Waiting. A Runnable goroutine is one that is ready to run but is not currently executing. An Executing goroutine is one that is currently running on an OS thread. A Waiting goroutine is one that is blocked, either waiting for I/O operations to complete or for a synchronization primitive (like a mutex) to become available. The Go scheduler uses a work-stealing algorithm to balance the load across multiple Processors. If one Processor has a lot of Runnable goroutines while another is idle, the idle Processor can "steal" work from the busy one to ensure efficient CPU utilization.
+                Also there are global queue of goroutines and Netpoller queue of goroutines. The global queue is used to store goroutines that are ready to run but cannot be assigned to a specific Processor because all Processors are busy. The Netpoller queue is used to manage goroutines that are waiting for network I/O operations to complete. The Netpoller is a special component of the Go runtime that efficiently monitors network connections and wakes up goroutines when data is available to read or write.
+                If a goroutine performs a blocking operation (like waiting for I/O), its Processor will be detached from the OS thread, allowing the OS thread to be reused for other goroutines. This helps prevent idle threads and ensures that the available OS threads are used efficiently. And that goroutine will be placed in the Netpoller queue.
+                So the algorithm of the scheduler is:
+                1. We check the Global queue once every 61 times, and if there are any Runnable goroutines there, we take them from it. So that goroutines that have been waiting for a long time in the global queue get a chance to run.
+                2. We check the Local queue of the Processor for Runnable goroutines.
+                3. If there are no Runnable goroutines in the Local queue, we try to steal a goroutine from another Processor's Local queue.
+                4. If we can't find any Runnable goroutines in the Local queue or steal from another Processor, we check the Netpoller queue for any goroutines that are ready to run.
+                Also there is a process called Sysmon that every 10 milliseconds checks the Netpoller queue for goroutines that are ready to run, checks for long-running goroutines that may be blocking the system, and performs other maintenance tasks to ensure the smooth operation of the Go scheduler.
+                `,
                 "id": 2,
-                "russian": `Consistency`,
+                "russian": `So how the Scheduler works`,
             },
             {
-                "arabic": `Isolation guarantees that concurrent transactions do not interfere with each other. Each transaction appears to be executed in a serial fashion, even if they are happening at the same time. This prevents one transaction from reading data that another transaction is in the process of modifying. Example: If two people try to withdraw money from the same account at the same time, isolation ensures that the transactions are processed one after the other. The database will not allow both transactions to read the same starting balance and then both successfully withdraw the money, leading to an incorrect final balance.`,
+                "arabic": `And that's it. If you have any questions, please ask.`,
                 "id": 3,
-                "russian": `Isolation`,
-            },
-            {
-                "arabic": `Durability guarantees that once a transaction is committed, its changes are permanent. Even if the system crashes immediately after a transaction is committed (e.g., due to a power outage), the database will recover and the committed changes will be present. The data is written to non-volatile storage, like a hard disk, to ensure its persistence. Example: Once a funds transfer is successfully committed, the new account balances are permanently recorded. If the database server then crashes, the next time it starts up, the new balances will still be there.`,
-                "id": 3,
-                "russian": `Durability`,
+                "russian": `ending`,
             },
             
         ];
